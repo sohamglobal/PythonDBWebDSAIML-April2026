@@ -1,0 +1,5 @@
+file=open("about.txt","a")
+line=input('enter a line : ')
+file.write(f"{line}\n")
+print("data written to file successfully")
+file.close()
