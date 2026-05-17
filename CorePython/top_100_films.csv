@@ -1,0 +1,101 @@
+filmname,year,language,genre,director,actor,imdbrating
+The Shawshank Redemption,1994,English,Drama,Frank Darabont,Tim Robbins,9.3
+The Godfather,1972,English,Crime/Drama,Francis Ford Coppola,Marlon Brando,9.2
+The Dark Knight,2008,English,Action/Crime,Christopher Nolan,Christian Bale,9.0
+Schindler's List,1993,English,Biography/Drama,Steven Spielberg,Liam Neeson,9.0
+12 Angry Men,1957,English,Drama,Sidney Lumet,Henry Fonda,9.0
+Pulp Fiction,1994,English,Crime/Drama,Quentin Tarantino,John Travolta,8.9
+The Lord of the Rings: The Return of the King,2003,English,Adventure/Fantasy,Peter Jackson,Elijah Wood,9.0
+Fight Club,1999,English,Drama/Thriller,David Fincher,Brad Pitt,8.8
+Forrest Gump,1994,English,Drama/Romance,Robert Zemeckis,Tom Hanks,8.8
+Inception,2010,English,Action/Sci-Fi,Christopher Nolan,Leonardo DiCaprio,8.8
+The Matrix,1999,English,Action/Sci-Fi,Lana Wachowski,Keanu Reeves,8.7
+Goodfellas,1990,English,Biography/Crime,Martin Scorsese,Robert De Niro,8.7
+One Flew Over the Cuckoo's Nest,1975,English,Drama,Milos Forman,Jack Nicholson,8.7
+Interstellar,2014,English,Adventure/Sci-Fi,Christopher Nolan,Matthew McConaughey,8.7
+The Silence of the Lambs,1991,English,Crime/Thriller,Jonathan Demme,Jodie Foster,8.6
+Saving Private Ryan,1998,English,Drama/War,Steven Spielberg,Tom Hanks,8.6
+The Green Mile,1999,English,Crime/Drama,Frank Darabont,Tom Hanks,8.6
+Gladiator,2000,English,Action/Adventure,Ridley Scott,Russell Crowe,8.5
+The Lion King,1994,English,Animation/Adventure,Roger Allers,Matthew Broderick,8.5
+Whiplash,2014,English,Drama/Music,Damien Chazelle,Miles Teller,8.5
+Joker,2019,English,Crime/Drama,Todd Phillips,Joaquin Phoenix,8.4
+The Departed,2006,English,Crime/Drama,Martin Scorsese,Leonardo DiCaprio,8.5
+Avengers: Endgame,2019,English,Action/Adventure,Anthony Russo,Robert Downey Jr.,8.4
+Django Unchained,2012,English,Drama/Western,Quentin Tarantino,Jamie Foxx,8.4
+The Prestige,2006,English,Drama/Mystery,Christopher Nolan,Hugh Jackman,8.5
+Memento,2000,English,Mystery/Thriller,Christopher Nolan,Guy Pearce,8.4
+Spirited Away,2001,English,Animation/Adventure,Hayao Miyazaki,Daveigh Chase,8.6
+Parasite,2019,English,Drama/Thriller,Bong Joon-ho,Song Kang-ho,8.5
+The Pianist,2002,English,Biography/Drama,Roman Polanski,Adrien Brody,8.5
+Braveheart,1995,English,Biography/Drama,Mel Gibson,Mel Gibson,8.3
+The Truman Show,1998,English,Drama/Sci-Fi,Peter Weir,Jim Carrey,8.2
+A Beautiful Mind,2001,English,Biography/Drama,Ron Howard,Russell Crowe,8.2
+No Country for Old Men,2007,English,Crime/Drama,Joel Coen,Tommy Lee Jones,8.2
+The Usual Suspects,1995,English,Crime/Mystery,Bryan Singer,Kevin Spacey,8.5
+Inglourious Basterds,2009,English,Adventure/Drama,Quentin Tarantino,Brad Pitt,8.3
+Once Upon a Time in America,1984,English,Crime/Drama,Sergio Leone,Robert De Niro,8.3
+Apocalypse Now,1979,English,Drama/War,Francis Ford Coppola,Marlon Brando,8.4
+Good Will Hunting,1997,English,Drama/Romance,Gus Van Sant,Matt Damon,8.3
+Catch Me If You Can,2002,English,Biography/Crime,Steven Spielberg,Leonardo DiCaprio,8.1
+The Wolf of Wall Street,2013,English,Biography/Crime,Martin Scorsese,Leonardo DiCaprio,8.2
+Back to the Future,1985,English,Adventure/Comedy,Robert Zemeckis,Michael J. Fox,8.5
+The Godfather Part II,1974,English,Crime/Drama,Francis Ford Coppola,Al Pacino,9.0
+Se7en,1995,English,Crime/Mystery,David Fincher,Brad Pitt,8.6
+American History X,1998,English,Crime/Drama,Tony Kaye,Edward Norton,8.5
+Alien,1979,English,Horror/Sci-Fi,Ridley Scott,Sigourney Weaver,8.5
+2001: A Space Odyssey,1968,English,Mystery/Sci-Fi,Stanley Kubrick,Keir Dullea,8.3
+Toy Story,1995,English,Animation/Adventure,John Lasseter,Tom Hanks,8.3
+The Shining,1980,English,Drama/Horror,Stanley Kubrick,Jack Nicholson,8.4
+Full Metal Jacket,1987,English,Drama/War,Stanley Kubrick,Matthew Modine,8.3
+Oppenheimer,2023,English,Biography/Drama,Christopher Nolan,Cillian Murphy,8.3
+Sholay,1975,Hindi,Action/Adventure,Ramesh Sippy,Amitabh Bachchan,8.2
+Deewar,1975,Hindi,Action/Crime,Yash Chopra,Amitabh Bachchan,8.0
+Mughal-E-Azam,1960,Hindi,Drama/History,K. Asif,Dilip Kumar,8.1
+Mother India,1957,Hindi,Drama,Mehboob Khan,Nargis,8.0
+Pyaasa,1957,Hindi,Drama/Romance,Guru Dutt,Guru Dutt,8.2
+Kaagaz Ke Phool,1959,Hindi,Drama/Romance,Guru Dutt,Guru Dutt,8.0
+3 Idiots,2009,Hindi,Comedy/Drama,Rajkumar Hirani,Aamir Khan,8.4
+PK,2014,Hindi,Comedy/Drama,Rajkumar Hirani,Aamir Khan,8.1
+Dangal,2016,Hindi,Biography/Drama,Nitesh Tiwari,Aamir Khan,8.3
+Lagaan,2001,Hindi,Drama/Sport,Ashutosh Gowariker,Aamir Khan,8.1
+Dilwale Dulhania Le Jayenge,1995,Hindi,Drama/Romance,Aditya Chopra,Shah Rukh Khan,8.1
+Kabhi Khushi Kabhie Gham,2001,Hindi,Drama/Romance,Karan Johar,Shah Rukh Khan,7.4
+Dil Chahta Hai,2001,Hindi,Comedy/Drama,Farhan Akhtar,Aamir Khan,8.1
+Rang De Basanti,2006,Hindi,Drama/History,Rakeysh Omprakash Mehra,Aamir Khan,8.1
+Black Friday,2004,Hindi,Crime/Drama,Anurag Kashyap,Kay Kay Menon,8.3
+Gangs of Wasseypur,2012,Hindi,Action/Crime,Anurag Kashyap,Manoj Bajpayee,8.3
+Dev.D,2009,Hindi,Drama/Romance,Anurag Kashyap,Abhay Deol,8.0
+Masaan,2015,Hindi,Drama/Romance,Neeraj Ghaywan,Vicky Kaushal,8.2
+Taare Zameen Par,2007,Hindi,Drama,Aamir Khan,Darsheel Safary,8.4
+A Wednesday,2008,Hindi,Crime/Thriller,Neeraj Pandey,Anupam Kher,8.1
+Special 26,2013,Hindi,Crime/Thriller,Neeraj Pandey,Akshay Kumar,8.0
+Queen,2014,Hindi,Adventure/Drama,Vikas Bahl,Kangana Ranaut,8.1
+Andhadhun,2018,Hindi,Crime/Thriller,Sriram Raghavan,Ayushmann Khurrana,8.3
+Article 15,2019,Hindi,Crime/Drama,Anubhav Sinha,Ayushmann Khurrana,8.1
+Gulaal,2009,Hindi,Drama/Thriller,Anurag Kashyap,Kay Kay Menon,8.1
+Udaan,2010,Hindi,Drama,Vikramaditya Motwane,Rajat Barmecha,8.3
+Lootera,2013,Hindi,Crime/Drama,Vikramaditya Motwane,Ranveer Singh,7.9
+Kahaani,2012,Hindi,Mystery/Thriller,Sujoy Ghosh,Vidya Balan,8.1
+Pink,2016,Hindi,Crime/Drama,Aniruddha Roy Chowdhury,Amitabh Bachchan,8.1
+Tumbbad,2018,Hindi,Fantasy/Horror,Rahi Anil Barve,Sohum Shah,8.3
+Raazi,2018,Hindi,Drama/Thriller,Meghna Gulzar,Alia Bhatt,7.9
+URI: The Surgical Strike,2019,Hindi,Action/Drama,Aditya Dhar,Vicky Kaushal,8.2
+Super 30,2019,Hindi,Biography/Drama,Vikas Bahl,Hrithik Roshan,7.9
+Bhaag Milkha Bhaag,2013,Hindi,Biography/Drama,Rakeysh Omprakash Mehra,Farhan Akhtar,8.1
+Mary Kom,2014,Hindi,Biography/Drama,Omung Kumar,Priyanka Chopra,7.2
+Chak De! India,2007,Hindi,Drama/Sport,Shimit Amin,Shah Rukh Khan,8.2
+Swades,2004,Hindi,Drama,Ashutosh Gowariker,Shah Rukh Khan,8.2
+Do Aankhen Barah Haath,1957,Hindi,Drama,V. Shantaram,V. Shantaram,7.8
+Guide,1965,Hindi,Drama/Romance,Vijay Anand,Dev Anand,7.9
+Anand,1971,Hindi,Drama,Hrishikesh Mukherjee,Rajesh Khanna,8.1
+Chupke Chupke,1975,Hindi,Comedy,Hrishikesh Mukherjee,Dharmendra,8.1
+Golmaal,1979,Hindi,Comedy,Hrishikesh Mukherjee,Amol Palekar,8.1
+Jaane Bhi Do Yaaron,1983,Hindi,Comedy/Drama,Kundan Shah,Naseeruddin Shah,8.2
+Ardh Satya,1983,Hindi,Crime/Drama,Govind Nihalani,Om Puri,8.3
+Ankur,1974,Hindi,Drama,Shyam Benegal,Shabana Azmi,7.9
+Nishant,1975,Hindi,Drama,Shyam Benegal,Girish Karnad,8.0
+Manthan,1976,Hindi,Drama,Shyam Benegal,Smita Patil,8.1
+Shree 420,1955,Hindi,Comedy/Drama,Raj Kapoor,Raj Kapoor,7.6
+Awaara,1951,Hindi,Crime/Drama,Raj Kapoor,Raj Kapoor,7.6
+Deewana,1992,Hindi,Drama/Romance,Raj Kanwar,Shah Rukh Khan,6.8

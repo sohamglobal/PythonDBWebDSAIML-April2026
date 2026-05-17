@@ -1,0 +1,11 @@
+nm=input('Enter employee name : ')
+gn=input('Enter gender : ')
+ag=input('Enter age : ')
+dp=input("Enter department : ")
+po=input('Enter post : ')
+lo=input('Enter location : ')
+
+file=open("emp.csv","a")
+file.write(f'{nm},{gn},{ag},{dp},{po},{lo}\n')
+print('data written to csv file')
+file.close()
