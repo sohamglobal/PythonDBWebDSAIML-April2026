@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praffulls Sports Club — Sign In</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#0b1f3a;
+  --navy-deep:#071429;
+  --navy-mid:#142b4f;
+  --gold:#f2a71b;
+  --gold-light:#ffcf6e;
+  --teal:#1fae8e;
+  --off-white:#f4f6fa;
+  --ink:#0b1f3a;
+}
+
+*{box-sizing:border-box;}
+
+body{
+  font-family:'Inter', sans-serif;
+  background:var(--off-white);
+  color:var(--ink);
+  min-height:100vh;
+}
+
+.font-display{
+  font-family:'Oswald', sans-serif;
+  text-transform:uppercase;
+}
+
+.font-mono{ font-family:'JetBrains Mono', monospace; }
+
+/* ===== PAGE WRAP ===== */
+.auth-wrap{
+  min-height:100vh;
+  display:flex;
+  align-items:stretch;
+}
+
+/* ===== LEFT BRAND PANEL ===== */
+.brand-panel{
+  position:relative;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(242,167,27,0.10), transparent 45%),
+    repeating-linear-gradient(115deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 46px),
+    linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color:var(--off-white);
+  padding:3.5rem 3rem;
+  overflow:hidden;
+  min-height:100vh;
+}
+.spotlight{
+  position:absolute;
+  width:520px; height:520px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(242,167,27,0.18), transparent 65%);
+  top:-160px; right:-160px;
+  animation:sweep 8s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes sweep{
+  0%,100%{ transform:translate(0,0) scale(1); }
+  50%{ transform:translate(-40px,60px) scale(1.15); }
+}
+@media (prefers-reduced-motion: reduce){ .spotlight{ animation:none; } }
+
+.crest{
+  width:64px;height:64px;
+  border-radius:50%;
+  border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Oswald', sans-serif;
+  font-weight:700;
+  font-size:1.4rem;
+  color:var(--gold);
+  letter-spacing:1px;
+  background:rgba(242,167,27,0.08);
+}
+
+.brand-title{
+  font-size:clamp(2.2rem, 4vw, 3rem);
+  line-height:1.05;
+  letter-spacing:.5px;
+}
+.brand-title .accent{ color:var(--gold); }
+
+.stat-row{
+  border-top:1px solid rgba(244,246,250,0.15);
+  padding-top:1.5rem;
+  margin-top:2.5rem;
+}
+.stat-item .num{
+  font-family:'Oswald', sans-serif;
+  font-size:1.8rem;
+  color:var(--gold-light);
+}
+.stat-item .lbl{
+  font-family:'JetBrains Mono', monospace;
+  font-size:.68rem;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:rgba(244,246,250,0.65);
+}
+
+.quote-block{
+  border-left:3px solid var(--gold);
+  padding-left:1rem;
+  margin-top:2.5rem;
+  max-width:420px;
+  color:rgba(244,246,250,0.8);
+  font-style:italic;
+}
+
+/* ===== RIGHT FORM PANEL ===== */
+.form-panel{
+  background:var(--off-white);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:3rem 1.5rem;
+}
+.form-card{
+  width:100%;
+  max-width:440px;
+}
+
+/* Scoreboard-style toggle */
+.mode-toggle{
+  position:relative;
+  display:flex;
+  background:var(--navy);
+  border-radius:999px;
+  padding:5px;
+  margin-bottom:2.25rem;
+}
+.mode-toggle .slider{
+  position:absolute;
+  top:5px; bottom:5px; left:5px;
+  width:calc(50% - 5px);
+  background:var(--gold);
+  border-radius:999px;
+  transition:transform .3s ease;
+  z-index:0;
+}
+.mode-toggle.register .slider{ transform:translateX(100%); }
+.mode-toggle button{
+  flex:1;
+  position:relative;
+  z-index:1;
+  border:none;
+  background:transparent;
+  padding:.7rem 1rem;
+  font-family:'Oswald', sans-serif;
+  letter-spacing:1px;
+  font-size:.95rem;
+  color:rgba(244,246,250,0.7);
+  transition:color .3s ease;
+}
+.mode-toggle button.active-mode{ color:var(--navy-deep); font-weight:600; }
+
+.form-heading{
+  font-size:1.9rem;
+  color:var(--navy);
+}
+.form-sub{
+  color:#6b7686;
+  font-size:.95rem;
+}
+
+.form-control-club{
+  border:1.5px solid #dfe3ea;
+  border-radius:10px;
+  padding:.7rem 1rem;
+  font-size:.95rem;
+}
+.form-control-club:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(242,167,27,0.2);
+}
+.input-icon-wrap{ position:relative; }
+.input-icon-wrap i{
+  position:absolute;
+  left:14px; top:50%;
+  transform:translateY(-50%);
+  color:#9aa4b2;
+}
+.input-icon-wrap .form-control-club{ padding-left:2.6rem; }
+.toggle-pw{
+  position:absolute;
+  right:12px; top:50%;
+  transform:translateY(-50%);
+  background:none; border:none;
+  color:#9aa4b2;
+  cursor:pointer;
+}
+
+.btn-club{
+  background:var(--navy);
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  padding:.8rem;
+  font-family:'Oswald', sans-serif;
+  letter-spacing:1px;
+  font-size:1rem;
+  transition:background .2s ease, transform .15s ease;
+}
+.btn-club:hover{ background:var(--navy-mid); color:#fff; transform:translateY(-1px); }
+
+.btn-outline-club{
+  border:1.5px solid #dfe3ea;
+  color:var(--navy);
+  border-radius:10px;
+  padding:.65rem;
+  font-weight:600;
+  font-size:.9rem;
+  background:#fff;
+}
+.btn-outline-club:hover{ border-color:var(--navy); background:#fff; color:var(--navy);}
+
+.divider-text{
+  display:flex; align-items:center; gap:.75rem;
+  color:#9aa4b2; font-size:.8rem;
+  margin:1.5rem 0;
+}
+.divider-text::before, .divider-text::after{
+  content:""; flex:1; height:1px; background:#e3e7ee;
+}
+
+.link-gold{ color:var(--gold); font-weight:600; text-decoration:none; }
+.link-gold:hover{ color:#d68e0f; text-decoration:underline; }
+
+.form-check-input:checked{
+  background-color:var(--gold);
+  border-color:var(--gold);
+}
+
+.strength-bar{
+  height:4px; border-radius:2px; background:#e3e7ee; overflow:hidden;
+}
+.strength-fill{
+  height:100%; width:0%; background:var(--teal); transition:width .25s ease, background .25s ease;
+}
+
+@media (max-width: 991.98px){
+  .brand-panel{ min-height:auto; padding:2.5rem 1.75rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="auth-wrap">
+  <div class="row g-0 flex-grow-1 w-100">
+
+    <!-- LEFT: BRAND PANEL -->
+    <div class="col-lg-5 d-none d-lg-flex">
+      <div class="brand-panel w-100 d-flex flex-column justify-content-between">
+        <div class="spotlight"></div>
+
+        <div class="position-relative">
+          <div class="d-flex align-items-center gap-3 mb-5">
+            <div class="crest">PSC</div>
+            <div>
+              <div class="font-mono" style="letter-spacing:2px; font-size:.7rem; color:var(--gold-light);">EST. 2026</div>
+              <div class="font-display" style="font-size:1.1rem; letter-spacing:1px;">PRAFFULLS SPORTS CLUB</div>
+            </div>
+          </div>
+
+          <h1 class="font-display brand-title mb-3">TRAIN HARD.<br><span class="accent">PLAY HARDER.</span></h1>
+          <p class="hero-lede" style="max-width:400px; color:rgba(244,246,250,0.75);">Your home ground for match schedules, team stats, bookings and everything happening at the club.</p>
+
+          <div class="quote-block">
+            "Champions aren't made in the gym. Champions are made from something deep inside — a desire, a dream, a vision."
+          </div>
+        </div>
+
+        <div class="position-relative stat-row">
+          <div class="row text-center g-3">
+            <div class="col-4 stat-item">
+              <div class="num">1,200+</div>
+              <div class="lbl">Members</div>
+            </div>
+            <div class="col-4 stat-item">
+              <div class="num">18</div>
+              <div class="lbl">Sports</div>
+            </div>
+            <div class="col-4 stat-item">
+              <div class="num">42</div>
+              <div class="lbl">Tournaments Won</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: FORM PANEL -->
+    <div class="col-lg-7">
+      <div class="form-panel">
+        <div class="form-card">
+
+          <!-- mobile brand mark -->
+          <div class="d-flex d-lg-none align-items-center gap-2 mb-4">
+            <div class="crest" style="width:48px;height:48px;font-size:1rem; border-color:var(--navy); color:var(--navy); background:rgba(11,31,58,0.06);">PSC</div>
+            <div class="font-display" style="color:var(--navy); font-size:1rem; letter-spacing:1px;">PRAFFULLS SPORTS CLUB</div>
+          </div>
+
+          <div class="mode-toggle" id="modeToggle">
+            <div class="slider"></div>
+            <button type="button" class="active-mode" id="loginModeBtn">SIGN IN</button>
+            <button type="button" id="registerModeBtn">JOIN THE CLUB</button>
+          </div>
+
+          <!-- LOGIN FORM -->
+          <div id="loginForm">
+            <h2 class="font-display form-heading mb-1">Welcome Back</h2>
+            <p class="form-sub mb-4">Sign in to check fixtures, book courts and track your stats.</p>
+
+            <form novalidate>
+              <div class="mb-3">
+                <label class="form-label small fw-semibold">Email or Member ID</label>
+                <div class="input-icon-wrap">
+                  <i class="bi bi-person-fill"></i>
+                  <input type="text" class="form-control form-control-club" placeholder="you@example.com" required>
+                </div>
+              </div>
+
+              <div class="mb-2">
+                <label class="form-label small fw-semibold">Password</label>
+                <div class="input-icon-wrap">
+                  <i class="bi bi-lock-fill"></i>
+                  <input type="password" class="form-control form-control-club" id="loginPw" placeholder="Enter your password" required>
+                  <button type="button" class="toggle-pw" data-target="loginPw"><i class="bi bi-eye"></i></button>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="rememberMe">
+                  <label class="form-check-label small" for="rememberMe">Remember me</label>
+                </div>
+                <a href="#" class="link-gold small">Forgot password?</a>
+              </div>
+
+              <button type="submit" class="btn btn-club w-100"><i class="bi bi-arrow-right-circle me-1"></i> SIGN IN</button>
+            </form>
+
+            <div class="divider-text">OR CONTINUE WITH</div>
+            <div class="row g-2">
+              <div class="col-6"><button class="btn btn-outline-club w-100"><i class="bi bi-google me-1"></i>Google</button></div>
+              <div class="col-6"><button class="btn btn-outline-club w-100"><i class="bi bi-facebook me-1"></i>Facebook</button></div>
+            </div>
+
+            <p class="text-center small mt-4 mb-0 text-muted">New to the club? <a href="#" class="link-gold" id="switchToRegister">Create an account</a></p>
+          </div>
+
+          <!-- REGISTER FORM -->
+          <div id="registerForm" class="d-none">
+            <h2 class="font-display form-heading mb-1">Join The Club</h2>
+            <p class="form-sub mb-4">Create your member profile in under a minute.</p>
+
+            <form novalidate>
+              <div class="row g-3 mb-3">
+                <div class="col-6">
+                  <label class="form-label small fw-semibold">First Name</label>
+                  <input type="text" class="form-control form-control-club" placeholder="Praffull" required>
+                </div>
+                <div class="col-6">
+                  <label class="form-label small fw-semibold">Last Name</label>
+                  <input type="text" class="form-control form-control-club" placeholder="Sharma" required>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label small fw-semibold">Email Address</label>
+                <div class="input-icon-wrap">
+                  <i class="bi bi-envelope-fill"></i>
+                  <input type="email" class="form-control form-control-club" placeholder="you@example.com" required>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label small fw-semibold">Preferred Sport</label>
+                <select class="form-select form-control-club">
+                  <option selected>Cricket</option>
+                  <option>Football</option>
+                  <option>Badminton</option>
+                  <option>Tennis</option>
+                  <option>Table Tennis</option>
+                  <option>Athletics</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div class="mb-2">
+                <label class="form-label small fw-semibold">Password</label>
+                <div class="input-icon-wrap">
+                  <i class="bi bi-lock-fill"></i>
+                  <input type="password" class="form-control form-control-club" id="regPw" placeholder="Create a password" required>
+                  <button type="button" class="toggle-pw" data-target="regPw"><i class="bi bi-eye"></i></button>
+                </div>
+              </div>
+              <div class="strength-bar mb-3"><div class="strength-fill" id="strengthFill"></div></div>
+
+              <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                <label class="form-check-label small" for="agreeTerms">I agree to the club's <a href="#" class="link-gold">terms &amp; code of conduct</a></label>
+              </div>
+
+              <button type="submit" class="btn btn-club w-100"><i class="bi bi-person-plus-fill me-1"></i> CREATE ACCOUNT</button>
+            </form>
+
+            <p class="text-center small mt-4 mb-0 text-muted">Already a member? <a href="#" class="link-gold" id="switchToLogin">Sign in</a></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  const toggle = document.getElementById('modeToggle');
+  const loginBtn = document.getElementById('loginModeBtn');
+  const registerBtn = document.getElementById('registerModeBtn');
+  const loginForm = document.getElementById('loginForm');
+  const registerForm = document.getElementById('registerForm');
+
+  function showLogin(){
+    toggle.classList.remove('register');
+    loginBtn.classList.add('active-mode');
+    registerBtn.classList.remove('active-mode');
+    loginForm.classList.remove('d-none');
+    registerForm.classList.add('d-none');
+  }
+  function showRegister(){
+    toggle.classList.add('register');
+    registerBtn.classList.add('active-mode');
+    loginBtn.classList.remove('active-mode');
+    registerForm.classList.remove('d-none');
+    loginForm.classList.add('d-none');
+  }
+
+  loginBtn.addEventListener('click', showLogin);
+  registerBtn.addEventListener('click', showRegister);
+  document.getElementById('switchToRegister').addEventListener('click', (e)=>{ e.preventDefault(); showRegister(); });
+  document.getElementById('switchToLogin').addEventListener('click', (e)=>{ e.preventDefault(); showLogin(); });
+
+  // password show/hide
+  document.querySelectorAll('.toggle-pw').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const target = document.getElementById(btn.dataset.target);
+      const icon = btn.querySelector('i');
+      if(target.type === 'password'){
+        target.type = 'text';
+        icon.classList.remove('bi-eye'); icon.classList.add('bi-eye-slash');
+      } else {
+        target.type = 'password';
+        icon.classList.remove('bi-eye-slash'); icon.classList.add('bi-eye');
+      }
+    });
+  });
+
+  // simple password strength meter
+  const regPw = document.getElementById('regPw');
+  const fill = document.getElementById('strengthFill');
+  regPw.addEventListener('input', ()=>{
+    const v = regPw.value;
+    let score = 0;
+    if(v.length >= 6) score++;
+    if(v.length >= 10) score++;
+    if(/[A-Z]/.test(v) && /[0-9]/.test(v)) score++;
+    if(/[^A-Za-z0-9]/.test(v)) score++;
+    const pct = (score/4)*100;
+    fill.style.width = pct + '%';
+    fill.style.background = pct < 50 ? '#e0533f' : (pct < 100 ? '#f2a71b' : '#1fae8e');
+  });
+</script>
+</body>
+</html>

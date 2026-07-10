@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cricket — Test, ODI &amp; T20</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --pitch-green:#1e5b34;
+  --pitch-green-dark:#123b21;
+  --ball-red:#c0272d;
+  --clay-tan:#d9a856;
+  --sky:#2f9bd6;
+  --cream:#f7f1e1;
+  --ink:#122016;
+  --white-ball:#f2f2f2;
+}
+
+*{box-sizing:border-box;}
+
+body{
+  font-family:'Rubik', sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  overflow-x:hidden;
+}
+
+.font-display{
+  font-family:'Anton', sans-serif;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.font-mono{
+  font-family:'JetBrains Mono', monospace;
+}
+
+/* ===== NAVBAR ===== */
+.navbar-cricket{
+  background:var(--pitch-green-dark);
+  border-bottom:4px solid var(--clay-tan);
+}
+.navbar-cricket .navbar-brand{
+  font-family:'Anton', sans-serif;
+  letter-spacing:2px;
+  color:var(--cream) !important;
+  font-size:1.6rem;
+}
+.navbar-cricket .nav-link{
+  color:rgba(247,241,225,0.8) !important;
+  font-weight:600;
+  font-size:.9rem;
+  letter-spacing:.5px;
+}
+.navbar-cricket .nav-link:hover{ color:var(--clay-tan) !important; }
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,0.06), transparent 60%),
+    repeating-linear-gradient(90deg, var(--pitch-green) 0 120px, #1a5230 120px 240px),
+    linear-gradient(180deg, var(--pitch-green) 0%, var(--pitch-green-dark) 100%);
+  color:var(--cream);
+  padding:6rem 0 5rem 0;
+  overflow:hidden;
+}
+.hero::before{
+  /* stumps silhouette */
+  content:"";
+  position:absolute;
+  right:-40px;
+  bottom:-10px;
+  width:260px;
+  height:260px;
+  background:
+    linear-gradient(#e7d4a1, #e7d4a1) 20px 0/12px 220px no-repeat,
+    linear-gradient(#e7d4a1, #e7d4a1) 60px 0/12px 220px no-repeat,
+    linear-gradient(#e7d4a1, #e7d4a1) 100px 0/12px 220px no-repeat;
+  opacity:.15;
+}
+.hero h1{
+  font-size:clamp(3.2rem, 9vw, 6.5rem);
+  line-height:.92;
+  color:var(--cream);
+}
+.hero .stroke-text{
+  -webkit-text-stroke: 2px var(--clay-tan);
+  color:transparent;
+}
+.hero-lede{
+  max-width:560px;
+  color:rgba(247,241,225,0.85);
+  font-size:1.15rem;
+}
+.scoreboard{
+  background:#0c1f14;
+  border:2px solid var(--clay-tan);
+  border-radius:10px;
+  padding:1.25rem 1.5rem;
+  box-shadow:0 20px 45px rgba(0,0,0,.35);
+}
+.scoreboard .label{
+  font-family:'JetBrains Mono', monospace;
+  font-size:.7rem;
+  letter-spacing:2px;
+  color:var(--clay-tan);
+  text-transform:uppercase;
+}
+.scoreboard .digit{
+  font-family:'JetBrains Mono', monospace;
+  font-weight:700;
+  font-size:1.9rem;
+  color:#f2f2f2;
+}
+.ball{
+  width:20px;height:20px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #e2565c, var(--ball-red));
+  display:inline-block;
+  box-shadow:0 3px 8px rgba(0,0,0,.4);
+  position:relative;
+  animation:spin 3s linear infinite;
+}
+.ball::after{
+  content:"";
+  position:absolute;
+  inset:2px 8px;
+  border-left:1.5px dashed #f2d9d9;
+  transform:rotate(20deg);
+}
+@keyframes spin{ to{ transform:rotate(360deg);} }
+@media (prefers-reduced-motion: reduce){ .ball{ animation:none; } }
+
+/* ===== SECTION LABELS ===== */
+.eyebrow{
+  font-family:'JetBrains Mono', monospace;
+  letter-spacing:3px;
+  font-size:.75rem;
+  color:var(--ball-red);
+  text-transform:uppercase;
+  font-weight:700;
+}
+.section-title{
+  font-family:'Anton', sans-serif;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:var(--pitch-green-dark);
+}
+
+/* ===== FORMAT TABS ===== */
+.format-tabs.nav-pills{
+  gap:.75rem;
+  flex-wrap:wrap;
+}
+.format-tabs .nav-link{
+  font-family:'Anton', sans-serif;
+  letter-spacing:1px;
+  font-size:1.05rem;
+  color:var(--pitch-green-dark);
+  background:#fff;
+  border:2px solid var(--pitch-green-dark);
+  border-radius:999px;
+  padding:.6rem 1.6rem;
+  transition:all .2s ease;
+}
+.format-tabs .nav-link .bi{ margin-right:.4rem; }
+.format-tabs .nav-link.active{
+  color:#fff;
+  border-color:var(--pitch-green-dark);
+}
+.format-tabs .nav-link#test-tab.active{ background:var(--pitch-green-dark); }
+.format-tabs .nav-link#odi-tab.active{ background:var(--sky); border-color:var(--sky);}
+.format-tabs .nav-link#t20-tab.active{ background:var(--ball-red); border-color:var(--ball-red);}
+.format-tabs .nav-link:hover{ transform:translateY(-2px); }
+
+.format-panel{
+  border-radius:20px;
+  padding:2.5rem;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+  min-height:420px;
+}
+.format-panel.test-bg{ background:linear-gradient(135deg, var(--pitch-green-dark), #1e5b34); }
+.format-panel.odi-bg{ background:linear-gradient(135deg, #1c5f8a, var(--sky)); }
+.format-panel.t20-bg{ background:linear-gradient(135deg, #7a1519, var(--ball-red)); }
+
+.stat-chip{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:12px;
+  padding:1rem;
+  height:100%;
+}
+.stat-chip .num{
+  font-family:'Anton', sans-serif;
+  font-size:1.9rem;
+  line-height:1;
+}
+.stat-chip .lbl{
+  font-family:'JetBrains Mono', monospace;
+  font-size:.7rem;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  opacity:.8;
+}
+
+.badge-soft{
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.3);
+  font-weight:500;
+}
+
+/* ===== COMPARISON TABLE ===== */
+.table-cricket thead th{
+  font-family:'Anton', sans-serif;
+  letter-spacing:1px;
+  background:var(--pitch-green-dark);
+  color:var(--cream);
+  border:none;
+  vertical-align:middle;
+}
+.table-cricket td{
+  vertical-align:middle;
+  font-weight:500;
+}
+.table-cricket tbody tr:hover{ background:#fbf3de; }
+.dot{ width:12px; height:12px; border-radius:50%; display:inline-block; margin-right:6px;}
+
+/* ===== ACCORDION ===== */
+.accordion-cricket .accordion-button{
+  font-family:'Anton', sans-serif;
+  letter-spacing:.5px;
+  background:#fff;
+  color:var(--pitch-green-dark);
+}
+.accordion-cricket .accordion-button:not(.collapsed){
+  background:var(--pitch-green-dark);
+  color:var(--cream);
+}
+.accordion-cricket .accordion-button:focus{ box-shadow:none; }
+.accordion-cricket .accordion-button::after{ filter:none; }
+
+/* ===== QUIZ / DID YOU KNOW CAROUSEL ===== */
+.fact-card{
+  background:var(--ink);
+  color:var(--cream);
+  border-radius:18px;
+  padding:2.5rem;
+  min-height:220px;
+}
+.fact-card .bi{ color:var(--clay-tan); }
+
+/* ===== FOOTER / SOCIAL ===== */
+footer.site-footer{
+  background:var(--pitch-green-dark);
+  color:var(--cream);
+  padding:3.5rem 0 2rem;
+}
+.social-icon{
+  width:56px;height:56px;
+  border-radius:50%;
+  display:inline-flex;
+  align-items:center;justify-content:center;
+  background:rgba(247,241,225,.08);
+  border:1.5px solid rgba(247,241,225,.35);
+  color:var(--cream);
+  font-size:1.4rem;
+  transition:all .25s ease;
+  text-decoration:none;
+}
+.social-icon:hover{
+  transform:translateY(-4px) rotate(-4deg);
+  color:var(--ink);
+}
+.social-icon.ig:hover{ background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af); border-color:transparent; color:#fff;}
+.social-icon.yt:hover{ background:#ff0000; border-color:#ff0000; color:#fff;}
+.social-icon.md:hover{ background:var(--cream); border-color:var(--cream); color:var(--ink);}
+
+.stitch-divider{
+  height:2px;
+  background:repeating-linear-gradient(90deg, var(--clay-tan) 0 10px, transparent 10px 20px);
+  opacity:.5;
+}
+
+/* Scroll reveal */
+.reveal{
+  opacity:0; transform:translateY(24px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.reveal.in{ opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-cricket sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#top"><i class="bi bi-circle-fill" style="color:var(--ball-red); font-size:.7rem; vertical-align:middle;"></i> CRICKETPEDIA</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" style="filter:invert(1);">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-lg-3">
+        <li class="nav-item"><a class="nav-link" href="#formats">Formats</a></li>
+        <li class="nav-item"><a class="nav-link" href="#compare">Compare</a></li>
+        <li class="nav-item"><a class="nav-link" href="#rules">Rules &amp; Terms</a></li>
+        <li class="nav-item"><a class="nav-link" href="#facts">Fun Facts</a></li>
+        <li class="nav-item"><a class="nav-link" href="#connect">Connect</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="container position-relative">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <span class="ball"></span>
+          <span class="font-mono" style="letter-spacing:2px; font-size:.8rem; color:var(--clay-tan);">A GAME OF THREE FORMATS</span>
+        </div>
+        <h1 class="font-display mb-3">THE GAME OF<br><span class="stroke-text">GLORIOUS</span> UNCERTAINTIES</h1>
+        <p class="hero-lede mb-4">One sport, three completely different rhythms — a five-day siege, a one-day chase, and a three-hour explosion. Scroll down to explore how Test, ODI and T20 cricket each rewrite the same rulebook.</p>
+        <a href="#formats" class="btn btn-lg font-display px-4" style="background:var(--ball-red); color:#fff; letter-spacing:1px; border-radius:999px;">
+          <i class="bi bi-play-fill"></i> Explore the Formats
+        </a>
+      </div>
+      <div class="col-lg-5">
+        <div class="scoreboard">
+          <div class="d-flex justify-content-between mb-3">
+            <span class="label">Format</span><span class="label">Overs · Days · Est. Time</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-secondary-subtle" style="border-color:rgba(255,255,255,.15) !important;">
+            <span class="digit">TEST</span><span class="font-mono text-white-50">∞ ov · 5 days</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center py-2 border-bottom" style="border-color:rgba(255,255,255,.15) !important;">
+            <span class="digit">ODI</span><span class="font-mono text-white-50">50 ov · ~8 hrs</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center py-2">
+            <span class="digit">T20</span><span class="font-mono text-white-50">20 ov · ~3 hrs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- INTRO STRIP -->
+<div class="container my-5 reveal">
+  <div class="row text-center g-4">
+    <div class="col-md-4">
+      <i class="bi bi-clock-history fs-1" style="color:var(--pitch-green-dark);"></i>
+      <h5 class="font-display mt-2">150+ YEARS</h5>
+      <p class="text-muted small">Since the first Test match in 1877, cricket has evolved without ever abandoning its origins.</p>
+    </div>
+    <div class="col-md-4">
+      <i class="bi bi-globe2 fs-1" style="color:var(--sky);"></i>
+      <h5 class="font-display mt-2">GLOBAL REACH</h5>
+      <p class="text-muted small">Played and followed passionately across Asia, Australia, England, Africa and the Caribbean.</p>
+    </div>
+    <div class="col-md-4">
+      <i class="bi bi-lightning-charge-fill fs-1" style="color:var(--ball-red);"></i>
+      <h5 class="font-display mt-2">3 FORMATS, 1 SOUL</h5>
+      <p class="text-muted small">Same bat, ball and pitch — completely different tests of skill, patience and nerve.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FORMATS SECTION -->
+<section id="formats" class="container py-5 reveal">
+  <div class="text-center mb-4">
+    <div class="eyebrow">Pick a format</div>
+    <h2 class="section-title display-5">Test · ODI · T20</h2>
+    <p class="text-muted">Click a tab below — each format plays by its own clock.</p>
+  </div>
+
+  <ul class="nav nav-pills format-tabs justify-content-center mb-4" id="formatTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="test-tab" data-bs-toggle="pill" data-bs-target="#test-pane" type="button" role="tab">
+        <i class="bi bi-shield-fill-check"></i>TEST
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="odi-tab" data-bs-toggle="pill" data-bs-target="#odi-pane" type="button" role="tab">
+        <i class="bi bi-sun-fill"></i>ODI
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="t20-tab" data-bs-toggle="pill" data-bs-target="#t20-pane" type="button" role="tab">
+        <i class="bi bi-lightning-fill"></i>T20
+      </button>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="formatTabContent">
+
+    <!-- TEST -->
+    <div class="tab-pane fade show active" id="test-pane" role="tabpanel">
+      <div class="format-panel test-bg">
+        <span class="badge badge-soft rounded-pill px-3 py-2 mb-3">Est. 1877 · The Original Format</span>
+        <h3 class="font-display display-6">TEST CRICKET</h3>
+        <p class="mb-4" style="max-width:640px; opacity:.9;">The longest and most demanding format, played over five days in white kits with a red ball. Widely regarded by purists as the ultimate examination of technique, patience and stamina — teams can fight for a draw just as hard as they fight for a win.</p>
+        <div class="row g-3 mb-4">
+          <div class="col-6 col-md-3"><div class="stat-chip"><div class="num">5</div><div class="lbl">Days</div></div></div>
+          <div class="col-6 col-md-3"><div class="stat-chip"><div class="num">2</div><div class="lbl">Innings / Team</div></div></div>
+          <div class="col-6 col-md-3"><div class="stat-chip"><div class="num">90</div><div class="lbl">Overs / Day (approx.)</div></div></div>
+          <div class="col-6 col-md-3"><div class="stat-chip"><div class="num">Red</div><div class="lbl">Ball Colour</div></div></div>
+        </div>
+        <div class="row g-2">
+          <div class="col-md-6"><i class="bi bi-check-circle-fill me-2"></i>Can end in a Win, Loss or Draw</div>
+          <div class="col-md-6"><i class="bi bi-check-circle-fill me-2"></i>Traditional white kit, red ball</div>
+          <div class="col-md-6"><i class="bi bi-check-circle-fill me-2"></i>New ball available every 80 overs</div>
+          <div class="col-md-6"><i class="bi bi-check-circle-fill me-2"></i>Ultimate prize: The ICC World Test Championship</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ODI -->
+    <div class="tab-pane fade" id="odi-pane" role="tabpanel">
+      <div class="format-panel odi-bg">
+        <span class="badge badge-soft rounded-pill px-3 py-2 mb-3">Est. 1971 · Debuted at the 1975 World Cup</span>
+        <h3 class="font-display display-6">ODI CRICKET</h3>
+        <p class="mb-4" style="max-width:640px; opacity:.9;">One Day Internationals compress the contest into a single day, with each side batting one innings of a fixed 50 overs. It balances patience with aggression, built around the drama of a run-chase and the pressure of the closing overs.</p>
+        <div class="row g-3 mb-4">
+          <div class="col-6 col-md-3"><div class="stat-chip"><div class="num">1</div><div class="lbl">Day</div></div></div>
+          <div class="col-6 col-md-3"><div class="stat-chip"><div class="num">50</div><div class="lbl">Overs / Side</div></div></div>
+          <div class="col-6 col-md-3"><div class="stat-chip"><div class="num">~8</div><div class="lbl">Hours Duration</div></div></div>
+          <div class="col-6 col-md-3"><div class="stat-chip"><div class="num">White</div><div class="lbl">Ball Colour</div></div></div>
+        </div>
+        <div class="row g-2">
+          <div class="col-md-6"><i class="bi bi-check-circle-fill me-2"></i>Coloured kits, day-night with floodlights</div>
+          <div class="col-md-6"><i class="bi bi-check-circle-fill me-2"></i>Powerplays restrict fielders in set overs</div>
+          <div class="col-md-6"><i class="bi bi-check-circle-fill me-2"></i>Two new balls used, one from each end</div>
+          <div class="col-md-6"><i class="bi bi-check-circle-fill me-2"></i>Flagship event: The ICC Cricket World Cup</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- T20 -->
+    <div class="tab-pane fade" id="t20-pane" role="tabpanel">
+      <div class="format-panel t20-bg">
+        <span class="badge badge-soft rounded-pill px-3 py-2 mb-3">Est. 2003 · Cricket's Fastest Format</span>
+        <h3 class="font-display display-6">T20 CRICKET</h3>
+        <p class="mb-4" style="max-width:640px; opacity:.9;">Twenty20 squeezes a full match into roughly three hours, prioritising boundaries, big-hitting and split-second tactics. Its short, explosive format has powered global leagues like the IPL, BBL and PSL and brought cricket to entirely new audiences.</p>
+        <div class="row g-3 mb-4">
+          <div class="col-6 col-md-3"><div class="stat-chip"><div class="num">~3</div><div class="lbl">Hours Duration</div></div></div>
+          <div class="col-6 col-md-3"><div class="stat-chip"><div class="num">20</div><div class="lbl">Overs / Side</div></div></div>
+          <div class="col-6 col-md-3"><div class="stat-chip"><div class="num">1</div><div class="lbl">Innings / Team</div></div></div>
+          <div class="col-6 col-md-3"><div class="stat-chip"><div class="num">White</div><div class="lbl">Ball Colour</div></div></div>
+        </div>
+        <div class="row g-2">
+          <div class="col-md-6"><i class="bi bi-check-circle-fill me-2"></i>High tempo, boundary-driven scoring</div>
+          <div class="col-md-6"><i class="bi bi-check-circle-fill me-2"></i>Strategic timeout for tactical resets</div>
+          <div class="col-md-6"><i class="bi bi-check-circle-fill me-2"></i>Franchise leagues drive global popularity</div>
+          <div class="col-md-6"><i class="bi bi-check-circle-fill me-2"></i>Flagship event: The ICC T20 World Cup</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section id="compare" class="container py-5 reveal">
+  <div class="text-center mb-4">
+    <div class="eyebrow">Side by side</div>
+    <h2 class="section-title display-5">Quick Comparison</h2>
+  </div>
+  <div class="table-responsive shadow-sm rounded-3 overflow-hidden">
+    <table class="table table-cricket mb-0 align-middle">
+      <thead>
+        <tr>
+          <th scope="col">Attribute</th>
+          <th scope="col"><span class="dot" style="background:var(--pitch-green-dark);"></span>Test</th>
+          <th scope="col"><span class="dot" style="background:var(--sky);"></span>ODI</th>
+          <th scope="col"><span class="dot" style="background:var(--ball-red);"></span>T20</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>First played</td><td>1877</td><td>1971</td><td>2003</td></tr>
+        <tr><td>Duration</td><td>Up to 5 days</td><td>~8 hours (1 day)</td><td>~3 hours</td></tr>
+        <tr><td>Overs per side</td><td>Unlimited</td><td>50</td><td>20</td></tr>
+        <tr><td>Innings per team</td><td>2</td><td>1</td><td>1</td></tr>
+        <tr><td>Ball colour</td><td>Red</td><td>White</td><td>White</td></tr>
+        <tr><td>Playing kit</td><td>Traditional whites</td><td>Coloured clothing</td><td>Coloured clothing</td></tr>
+        <tr><td>Can end in a draw?</td><td>Yes</td><td>No (Result / Tie / No Result)</td><td>No (Result / Tie / No Result)</td></tr>
+        <tr><td>Flagship event</td><td>World Test Championship</td><td>Cricket World Cup</td><td>T20 World Cup</td></tr>
+        <tr><td>Skill emphasis</td><td>Patience &amp; technique</td><td>Balance of pace &amp; strategy</td><td>Power-hitting &amp; agility</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- RULES / GLOSSARY ACCORDION -->
+<section id="rules" class="container py-5 reveal">
+  <div class="text-center mb-4">
+    <div class="eyebrow">Know the game</div>
+    <h2 class="section-title display-5">Common Rules &amp; Terms</h2>
+    <p class="text-muted">Concepts that run across all three formats.</p>
+  </div>
+  <div class="accordion accordion-cricket" id="rulesAccordion">
+
+    <div class="accordion-item mb-2 rounded-3 overflow-hidden border">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#rule1">
+          <i class="bi bi-person-check-fill me-2"></i> How a Batter Gets Out
+        </button>
+      </h2>
+      <div id="rule1" class="accordion-collapse collapse show" data-bs-parent="#rulesAccordion">
+        <div class="accordion-body">
+          The most common dismissals are <strong>Bowled</strong> (ball hits the stumps), <strong>Caught</strong> (a fielder catches the ball before it bounces), <strong>LBW</strong> — leg before wicket (the ball would have hit the stumps but strikes the batter's leg first), <strong>Run Out</strong>, and <strong>Stumped</strong> (the wicketkeeper removes the bails while the batter is out of the crease).
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item mb-2 rounded-3 overflow-hidden border">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rule2">
+          <i class="bi bi-arrow-repeat me-2"></i> Overs, Wickets &amp; Innings
+        </button>
+      </h2>
+      <div id="rule2" class="accordion-collapse collapse" data-bs-parent="#rulesAccordion">
+        <div class="accordion-body">
+          An <strong>over</strong> is a set of 6 legal deliveries bowled by one bowler. A team's innings ends when it has either used all its available overs (ODI/T20) or lost 10 wickets — or, in Tests, when the captain chooses to "declare."
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item mb-2 rounded-3 overflow-hidden border">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rule3">
+          <i class="bi bi-plus-circle me-2"></i> Scoring Runs
+        </button>
+      </h2>
+      <div id="rule3" class="accordion-collapse collapse" data-bs-parent="#rulesAccordion">
+        <div class="accordion-body">
+          Runs come from batters running between the wickets, or automatically when the ball crosses the boundary — <strong>4 runs</strong> if it touches the ground first, <strong>6 runs</strong> if it clears the boundary on the full. Extra runs (wides, no-balls, byes) are added to the team's total.
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item mb-2 rounded-3 overflow-hidden border">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rule4">
+          <i class="bi bi-people-fill me-2"></i> Team &amp; Field Roles
+        </button>
+      </h2>
+      <div id="rule4" class="accordion-collapse collapse" data-bs-parent="#rulesAccordion">
+        <div class="accordion-body">
+          Each side fields 11 players. Roles include <strong>batters</strong>, <strong>bowlers</strong> (pace or spin), <strong>all-rounders</strong> who do both, and the <strong>wicketkeeper</strong>, who stands behind the stumps to collect deliveries and attempt stumpings or catches.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DID YOU KNOW CAROUSEL -->
+<section id="facts" class="container py-5 reveal">
+  <div class="text-center mb-4">
+    <div class="eyebrow">Trivia</div>
+    <h2 class="section-title display-5">Did You Know?</h2>
+  </div>
+  <div id="factCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="fact-card text-center mx-auto" style="max-width:720px;">
+          <i class="bi bi-quote fs-1"></i>
+          <p class="fs-5 mt-2">The longest Test match ever played lasted <strong>10 days</strong> (including rest days) — England vs South Africa, 1939 — and still ended without a result because the ship home couldn't wait any longer.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="fact-card text-center mx-auto" style="max-width:720px;">
+          <i class="bi bi-quote fs-1"></i>
+          <p class="fs-5 mt-2">The first-ever ODI was played in <strong>1971</strong> between Australia and England — purely as a substitute after rain washed out a Test match.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="fact-card text-center mx-auto" style="max-width:720px;">
+          <i class="bi bi-quote fs-1"></i>
+          <p class="fs-5 mt-2">T20 cricket's biggest stage, the <strong>IPL</strong>, launched in 2008 and is now among the most-watched sporting leagues on the planet.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#factCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" style="filter:invert(1) grayscale(1);"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#factCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" style="filter:invert(1) grayscale(1);"></span>
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER / SOCIAL -->
+<footer class="site-footer" id="connect">
+  <div class="container text-center">
+    <h3 class="font-display mb-2">STAY IN THE GAME</h3>
+    <p class="mb-4" style="opacity:.75;">Follow along for match breakdowns, stats and stories from the world of cricket.</p>
+    <div class="d-flex justify-content-center gap-3 mb-4">
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="social-icon ig" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="https://youtube.com" target="_blank" rel="noopener" class="social-icon yt" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+      <a href="https://medium.com" target="_blank" rel="noopener" class="social-icon md" aria-label="Medium"><i class="bi bi-medium"></i></a>
+    </div>
+    <div class="stitch-divider mb-3"></div>
+    <p class="small mb-0" style="opacity:.6;">Made for the love of the game · Cricketpedia © 2026</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  // simple scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, {threshold:.15});
+  reveals.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
