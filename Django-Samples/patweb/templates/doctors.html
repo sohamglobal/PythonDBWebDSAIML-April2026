@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Doctors - HealthCare Hospital</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#eef7ff;
+}
+
+header{
+background:linear-gradient(135deg,#0d6efd,#00b894);
+color:white;
+padding:20px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+header h1{
+font-size:36px;
+}
+
+header p{
+margin-top:8px;
+font-size:18px;
+}
+
+.back{
+margin:25px;
+}
+
+.back a{
+text-decoration:none;
+background:#0d6efd;
+color:white;
+padding:12px 25px;
+border-radius:30px;
+font-weight:bold;
+transition:.3s;
+}
+
+.back a:hover{
+background:#00b894;
+}
+
+.container{
+width:92%;
+margin:auto;
+padding-bottom:40px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+}
+
+.card{
+background:white;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,.12);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card img{
+width:100%;
+height:250px;
+object-fit:cover;
+}
+
+.content{
+padding:20px;
+}
+
+.content h2{
+color:#0d6efd;
+margin-bottom:10px;
+}
+
+.specialization{
+display:inline-block;
+background:#00b894;
+color:white;
+padding:6px 15px;
+border-radius:20px;
+margin-bottom:15px;
+font-size:14px;
+}
+
+.content p{
+line-height:1.7;
+color:#555;
+margin-bottom:8px;
+}
+
+.book{
+margin-top:15px;
+display:inline-block;
+background:#0d6efd;
+color:white;
+padding:10px 20px;
+text-decoration:none;
+border-radius:25px;
+transition:.3s;
+}
+
+.book:hover{
+background:#00b894;
+}
+
+footer{
+margin-top:40px;
+background:#0d6efd;
+color:white;
+text-align:center;
+padding:25px;
+}
+
+@media(max-width:768px){
+
+header h1{
+font-size:28px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🏥 Meet Our Medical Specialists</h1>
+<p>Experienced Doctors Dedicated to Your Health</p>
+</header>
+
+<div class="back">
+<a href="/hospital">⬅ Back to Home</a>
+</div>
+
+<div class="container">
+
+<div class="grid">
+
+<!-- Cardiology -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800" alt="">
+<div class="content">
+<h2>Dr. Rajesh Sharma</h2>
+<div class="specialization">❤️ Cardiology</div>
+<p><strong>Experience:</strong> 18 Years</p>
+<p>Specialist in heart disease, ECG, angioplasty, hypertension and preventive cardiology.</p>
+<a href="#" class="book">Book Appointment</a>
+</div>
+</div>
+
+<!-- Neurology -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800" alt="">
+<div class="content">
+<h2>Dr. Sneha Mehta</h2>
+<div class="specialization">🧠 Neurology</div>
+<p><strong>Experience:</strong> 15 Years</p>
+<p>Expert in stroke treatment, epilepsy, migraine, Parkinson's disease and neurological disorders.</p>
+<a href="#" class="book">Book Appointment</a>
+</div>
+</div>
+
+<!-- Orthopedics -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=800" alt="">
+<div class="content">
+<h2>Dr. Amit Verma</h2>
+<div class="specialization">🦴 Orthopedics</div>
+<p><strong>Experience:</strong> 20 Years</p>
+<p>Specialist in bone fractures, joint replacement, arthritis and sports injuries.</p>
+<a href="#" class="book">Book Appointment</a>
+</div>
+</div>
+
+<!-- Pediatrics -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=800" alt="">
+<div class="content">
+<h2>Dr. Priya Kulkarni</h2>
+<div class="specialization">👶 Pediatrics</div>
+<p><strong>Experience:</strong> 12 Years</p>
+<p>Child healthcare specialist providing vaccinations, newborn care and adolescent health services.</p>
+<a href="#" class="book">Book Appointment</a>
+</div>
+</div>
+
+<!-- Gynecology -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?w=800" alt="">
+<div class="content">
+<h2>Dr. Neha Gupta</h2>
+<div class="specialization">🌸 Gynecology</div>
+<p><strong>Experience:</strong> 16 Years</p>
+<p>Expert in women's health, pregnancy care, infertility treatment and laparoscopic surgery.</p>
+<a href="#" class="book">Book Appointment</a>
+</div>
+</div>
+
+<!-- Dermatology -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=800" alt="">
+<div class="content">
+<h2>Dr. Vivek Rao</h2>
+<div class="specialization">🌞 Dermatology</div>
+<p><strong>Experience:</strong> 14 Years</p>
+<p>Specialist in skin diseases, acne treatment, cosmetic dermatology and hair care.</p>
+<a href="#" class="book">Book Appointment</a>
+</div>
+</div>
+
+<!-- ENT -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800" alt="">
+<div class="content">
+<h2>Dr. Anjali Deshmukh</h2>
+<div class="specialization">👂 ENT</div>
+<p><strong>Experience:</strong> 17 Years</p>
+<p>Expert in ear, nose and throat disorders, sinus surgery and hearing problems.</p>
+<a href="#" class="book">Book Appointment</a>
+</div>
+</div>
+
+<!-- General Medicine -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1612531385446-f7b6b8f8dfd5?w=800" alt="">
+<div class="content">
+<h2>Dr. Karan Patel</h2>
+<div class="specialization">🩺 General Medicine</div>
+<p><strong>Experience:</strong> 22 Years</p>
+<p>Comprehensive healthcare, diabetes management, infections, hypertension and preventive care.</p>
+<a href="#" class="book">Book Appointment</a>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+<h2>🏥 HealthCare Hospital</h2>
+
+<p>Providing Quality Healthcare with Compassion</p>
+
+<p>Emergency Helpline : +91 98765 43210</p>
+
+<p>© 2026 HealthCare Hospital. All Rights Reserved.</p>
+
+</footer>
+
+</body>
+</html>

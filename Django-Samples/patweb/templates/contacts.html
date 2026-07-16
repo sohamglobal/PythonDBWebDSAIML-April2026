@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | HealthCare Hospital</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#eef7ff;
+}
+
+/* Header */
+
+header{
+background:linear-gradient(135deg,#0d6efd,#00b894);
+color:white;
+text-align:center;
+padding:30px;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+header h1{
+font-size:40px;
+}
+
+header p{
+margin-top:10px;
+font-size:18px;
+}
+
+/* Back Button */
+
+.top{
+width:92%;
+margin:20px auto;
+}
+
+.top a{
+display:inline-block;
+background:#0d6efd;
+color:white;
+padding:12px 25px;
+text-decoration:none;
+border-radius:30px;
+font-weight:600;
+transition:.3s;
+}
+
+.top a:hover{
+background:#00b894;
+}
+
+/* Layout */
+
+.container{
+width:92%;
+margin:auto;
+display:flex;
+gap:35px;
+flex-wrap:wrap;
+padding-bottom:40px;
+}
+
+.left{
+flex:1;
+min-width:320px;
+}
+
+.right{
+flex:1;
+min-width:320px;
+}
+
+/* Cards */
+
+.card{
+background:white;
+padding:30px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.12);
+margin-bottom:25px;
+}
+
+.card h2{
+color:#0d6efd;
+margin-bottom:20px;
+}
+
+.card p{
+margin:10px 0;
+line-height:1.7;
+color:#555;
+}
+
+/* Form */
+
+input,
+textarea{
+width:100%;
+padding:14px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:15px;
+}
+
+textarea{
+height:150px;
+resize:vertical;
+}
+
+button{
+width:100%;
+padding:15px;
+border:none;
+background:#00b894;
+color:white;
+font-size:18px;
+border-radius:8px;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#0d6efd;
+}
+
+/* Map */
+
+.map{
+height:250px;
+background:#dbeeff;
+display:flex;
+justify-content:center;
+align-items:center;
+border-radius:12px;
+font-size:22px;
+color:#0d6efd;
+font-weight:bold;
+}
+
+/* Footer */
+
+footer{
+background:#0d6efd;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:20px;
+}
+
+footer p{
+margin:8px;
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+.container{
+flex-direction:column;
+}
+
+header h1{
+font-size:32px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📞 Contact HealthCare Hospital</h1>
+
+<p>We are always here to help you and your family.</p>
+
+</header>
+
+<div class="top">
+
+<a href="/hospital">⬅ Back to Home</a>
+
+</div>
+
+<div class="container">
+
+<div class="left">
+
+<div class="card">
+
+<h2>🏥 Hospital Information</h2>
+
+<p><strong>Hospital Name:</strong> HealthCare Hospital</p>
+
+<p><strong>Address:</strong><br>
+123 Medical Avenue,<br>
+Central City,<br>
+Maharashtra, India - 444601
+</p>
+
+<p><strong>Reception:</strong> +91 98765 43210</p>
+
+<p><strong>Emergency:</strong> +91 98765 40000</p>
+
+<p><strong>Email:</strong> info@healthcarehospital.com</p>
+
+<p><strong>Website:</strong> www.healthcarehospital.com</p>
+
+</div>
+
+<div class="card">
+
+<h2>🕒 Working Hours</h2>
+
+<p>Monday - Saturday : 8:00 AM - 8:00 PM</p>
+
+<p>Sunday : 9:00 AM - 2:00 PM</p>
+
+<p><strong>Emergency Department:</strong> Open 24 × 7</p>
+
+</div>
+
+<div class="card">
+
+<h2>🏥 Departments</h2>
+
+<p>❤️ Cardiology</p>
+<p>🧠 Neurology</p>
+<p>🦴 Orthopedics</p>
+<p>👶 Pediatrics</p>
+<p>🌸 Gynecology</p>
+<p>👂 ENT</p>
+<p>🌞 Dermatology</p>
+<p>🩺 General Medicine</p>
+
+</div>
+
+<div class="card">
+
+<h2>📍 Hospital Location</h2>
+
+<div class="map">
+
+Google Map Location
+
+</div>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<div class="card">
+
+<h2>✉ Send Us a Message</h2>
+
+<form>
+
+<input type="text" placeholder="Full Name" required>
+
+<input type="email" placeholder="Email Address" required>
+
+<input type="tel" placeholder="Mobile Number" required>
+
+<input type="text" placeholder="Subject" required>
+
+<textarea placeholder="Write your message here..." required></textarea>
+
+<button type="submit">
+
+Send Message
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+<h2>🏥 HealthCare Hospital</h2>
+
+<p>Compassion • Care • Commitment</p>
+
+<p>Emergency Helpline: +91 98765 40000</p>
+
+<p>Email: info@healthcarehospital.com</p>
+
+<p>© 2026 HealthCare Hospital. All Rights Reserved.</p>
+
+</footer>
+
+</body>
+</html>

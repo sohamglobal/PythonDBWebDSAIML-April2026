@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hospital Patient Management System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f9ff;
+}
+
+/* HEADER */
+
+header{
+background:linear-gradient(135deg,#0d6efd,#00b894);
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:white;
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:25px;
+font-weight:500;
+transition:.3s;
+}
+
+nav a:hover{
+color:yellow;
+}
+
+/* HERO */
+
+.hero{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:60px 8%;
+flex-wrap:wrap;
+background:linear-gradient(to right,#edf6ff,#ffffff);
+}
+
+.hero-text{
+flex:1;
+padding:20px;
+}
+
+.hero-text h1{
+font-size:48px;
+color:#0d6efd;
+margin-bottom:20px;
+}
+
+.hero-text h3{
+color:#009966;
+margin-bottom:20px;
+}
+
+.hero-text p{
+font-size:18px;
+line-height:1.8;
+color:#444;
+margin-bottom:30px;
+}
+
+.hero-text button{
+padding:15px 30px;
+background:#0d6efd;
+color:white;
+border:none;
+border-radius:30px;
+font-size:18px;
+cursor:pointer;
+transition:.3s;
+}
+
+.hero-text button:hover{
+background:#009966;
+}
+
+.hero-image{
+flex:1;
+text-align:center;
+padding:20px;
+}
+
+.hero-image img{
+width:100%;
+max-width:500px;
+}
+
+/* MAIN */
+
+.container{
+display:flex;
+justify-content:center;
+align-items:flex-start;
+gap:40px;
+padding:50px 8%;
+flex-wrap:wrap;
+}
+
+/* CARD */
+
+.card{
+background:white;
+width:400px;
+padding:35px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.card h2{
+text-align:center;
+margin-bottom:25px;
+color:#0d6efd;
+}
+
+input,select{
+
+width:100%;
+padding:14px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:15px;
+
+}
+
+button.submit{
+
+width:100%;
+padding:14px;
+border:none;
+background:#00b894;
+color:white;
+font-size:18px;
+border-radius:8px;
+cursor:pointer;
+transition:.3s;
+
+}
+
+button.submit:hover{
+
+background:#0d6efd;
+
+}
+
+.toggle{
+
+text-align:center;
+margin-top:20px;
+
+}
+
+.toggle a{
+
+color:#0d6efd;
+cursor:pointer;
+font-weight:bold;
+text-decoration:none;
+
+}
+
+/* FEATURES */
+
+.features{
+
+padding:60px 8%;
+background:white;
+
+}
+
+.features h2{
+
+text-align:center;
+margin-bottom:40px;
+font-size:38px;
+color:#0d6efd;
+
+}
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+
+}
+
+.box{
+
+background:#f8fbff;
+padding:30px;
+border-radius:15px;
+text-align:center;
+transition:.4s;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.box:hover{
+
+transform:translateY(-10px);
+
+}
+
+.box h3{
+
+margin:15px 0;
+color:#009966;
+
+}
+
+/* FOOTER */
+
+footer{
+
+background:#0d6efd;
+color:white;
+text-align:center;
+padding:30px;
+margin-top:50px;
+
+}
+
+footer p{
+
+margin:8px;
+
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+.hero{
+
+flex-direction:column;
+
+}
+
+.hero-text h1{
+
+font-size:36px;
+
+}
+
+header{
+
+flex-direction:column;
+
+}
+
+nav{
+
+margin-top:10px;
+
+}
+
+nav a{
+
+margin:10px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+🏥 HealthCare Hospital
+</div>
+
+<nav>
+
+<a href="#">Home</a>
+<a href="docs">Doctors</a>
+<a href="#">Services</a>
+<a href="cont">Contact</a>
+
+</nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>Hospital Patient Management System</h1>
+
+<h3>Safe • Secure • Fast • Digital Healthcare</h3>
+
+<p>
+
+Manage patient records, appointments, reports and healthcare services
+through our modern hospital management portal.
+
+Patients can easily register, login and access all hospital services online.
+
+</p>
+
+<button onclick="document.getElementById('login').scrollIntoView({behavior:'smooth'})">
+Get Started
+</button>
+
+</div>
+
+<div class="hero-image">
+
+<img src="https://cdn-icons-png.flaticon.com/512/3774/3774299.png">
+
+</div>
+
+</section>
+
+<!-- LOGIN / REGISTER -->
+
+<section class="container">
+
+<!-- LOGIN -->
+
+<div class="card" id="login">
+
+<h2>Patient Login</h2>
+
+<form>
+
+<input type="email" placeholder="Email Address">
+
+<input type="password" placeholder="Password">
+
+<button class="submit">
+Login
+</button>
+
+</form>
+
+<div class="toggle">
+
+Don't have an account?
+
+<a onclick="showRegister()">Register Here</a>
+
+</div>
+
+</div>
+
+<!-- REGISTER -->
+
+<div class="card" id="register" style="display:none;">
+
+<h2>Patient Registration</h2>
+
+<form>
+
+<input type="text" placeholder="Full Name">
+
+<input type="number" placeholder="Age">
+
+<select>
+
+<option>Select Gender</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+
+</select>
+
+<input type="text" placeholder="Mobile Number">
+
+<input type="email" placeholder="Email">
+
+<input type="password" placeholder="Create Password">
+
+<button class="submit">
+
+Create Account
+
+</button>
+
+</form>
+
+<div class="toggle">
+
+Already Registered?
+
+<a onclick="showLogin()">
+
+Login Here
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FEATURES -->
+
+<section class="features">
+
+<h2>Our Services</h2>
+
+<div class="grid">
+
+<div class="box">
+
+<h3>👨‍⚕️ Expert Doctors</h3>
+
+<p>Consult experienced specialists with ease.</p>
+
+</div>
+
+<div class="box">
+
+<h3>📅 Online Appointments</h3>
+
+<p>Book appointments in just a few clicks.</p>
+
+</div>
+
+<div class="box">
+
+<h3>💊 Medical Records</h3>
+
+<p>Access your reports and prescriptions securely.</p>
+
+</div>
+
+<div class="box">
+
+<h3>🩺 Health Monitoring</h3>
+
+<p>Track your health history digitally.</p>
+
+</div>
+
+<div class="box">
+
+<h3>🚑 Emergency Support</h3>
+
+<p>24×7 emergency healthcare assistance.</p>
+
+</div>
+
+<div class="box">
+
+<h3>🔒 Secure Patient Data</h3>
+
+<p>Your information is encrypted and protected.</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<h2>🏥 HealthCare Hospital</h2>
+
+<p>Hospital Patient Management System</p>
+
+<p>Email : support@healthcarehospital.com</p>
+
+<p>Phone : +91 98765 43210</p>
+
+<p>
+
+© 2026 HealthCare Hospital. All Rights Reserved.
+
+</p>
+
+</footer>
+
+<script>
+
+function showRegister(){
+
+document.getElementById("login").style.display="none";
+document.getElementById("register").style.display="block";
+
+}
+
+function showLogin(){
+
+document.getElementById("register").style.display="none";
+document.getElementById("login").style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
