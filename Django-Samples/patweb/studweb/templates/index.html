@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>students web</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body style="margin-top: 30px;">
+    <div class="container">
+        <h1 class="display-5">Students Web</h1>
+        <hr>
+        <form action="/search/" method="post">
+            {% csrf_token %}
+            Account Number <input type="number" name="ano" required autocomplete="off">
+            <input type="submit" value="Search">
+        </form>
+
+        <br>
+        <img src="/static/stud.gif" height="200px">
+
+        <br>
+        <a href="/register">New student registration</a>
+        <br>
+        <a href="/login">Login Now</a>
+        <br>
+        <a href="/show/">Show Python data on HTML page</a>
+        <br>
+        <a href="/doclist/">Doctors list</a>
+        <br>
+        <a href="/workers/">Co-workers from MongoDB</a>
+        <br>
+        <a href="/newworker/">Add new coworker in MongoDB</a>
+
+    </div>
+
+    
+</body>
+</html>

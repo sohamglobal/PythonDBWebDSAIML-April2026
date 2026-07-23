@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add New Worker</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --clr-navy: #1e2a52;
+    --clr-indigo: #4f5bd5;
+    --clr-violet: #9b5de5;
+    --clr-pink: #f15bb5;
+    --clr-amber: #fee440;
+    --clr-teal: #00bbf9;
+    --clr-mint: #eafcf9;
+  }
+
+  body{
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    background:
+      radial-gradient(circle at 10% 15%, rgba(155,93,229,0.35), transparent 40%),
+      radial-gradient(circle at 90% 85%, rgba(0,187,249,0.30), transparent 45%),
+      linear-gradient(135deg, var(--clr-navy) 0%, #2a1b4d 55%, #3b1656 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+  }
+
+  h1, h2, .brand-font{
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .form-shell{
+    width: 100%;
+    max-width: 720px;
+    background: #ffffff;
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(15, 10, 40, 0.45);
+  }
+
+  .form-header{
+    background: linear-gradient(120deg, var(--clr-indigo), var(--clr-violet) 55%, var(--clr-pink));
+    padding: 38px 40px 32px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form-header::after{
+    content: "";
+    position: absolute;
+    right: -40px;
+    top: -60px;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .form-header .eyebrow{
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    opacity: 0.85;
+  }
+
+  .form-header h1{
+    font-weight: 800;
+    font-size: 2rem;
+    margin: 6px 0 4px;
+  }
+
+  .form-header p{
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.95rem;
+  }
+
+  .form-body{
+    padding: 36px 40px 40px;
+    background: var(--clr-mint);
+  }
+
+  .field-label{
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--clr-navy);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .field-label .dot{
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .form-control, .form-select{
+    border-radius: 12px;
+    border: 2px solid #dfe6ff;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    background: #fff;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .15s ease;
+  }
+
+  .form-control:focus, .form-select:focus{
+    border-color: var(--clr-indigo);
+    box-shadow: 0 0 0 4px rgba(79, 91, 213, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .gender-wrap{
+    display: flex;
+    gap: 12px;
+  }
+
+  .gender-option{
+    flex: 1;
+  }
+
+  .gender-option input[type="radio"]{
+    display: none;
+  }
+
+  .gender-option label{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 2px solid #dfe6ff;
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-weight: 600;
+    color: var(--clr-navy);
+    cursor: pointer;
+    transition: all .18s ease;
+    font-size: 0.92rem;
+  }
+
+  .gender-option input[type="radio"]:checked + label{
+    border-color: var(--clr-violet);
+    background: linear-gradient(120deg, rgba(79,91,213,0.12), rgba(155,93,229,0.12));
+    color: var(--clr-violet);
+    box-shadow: 0 4px 12px rgba(155,93,229,0.25);
+  }
+
+  .salary-group{
+    position: relative;
+  }
+
+  .salary-group .currency{
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+    color: var(--clr-teal);
+    z-index: 5;
+  }
+
+  .salary-group input{
+    padding-left: 32px;
+  }
+
+  .submit-btn{
+    background: linear-gradient(120deg, var(--clr-indigo), var(--clr-pink));
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    padding: 13px 20px;
+    border-radius: 14px;
+    width: 100%;
+    font-size: 1rem;
+    box-shadow: 0 12px 25px rgba(155, 93, 229, 0.35);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+
+  .submit-btn:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(241, 91, 181, 0.4);
+    color: #fff;
+  }
+
+  .status-msg{
+    display: none;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    margin-top: 18px;
+  }
+
+  .status-msg.success{
+    background: #e4faf0;
+    color: #0d8f5b;
+    border: 1px solid #b7ecd7;
+  }
+
+  .status-msg.error{
+    background: #fdecec;
+    color: #c62828;
+    border: 1px solid #f6c4c4;
+  }
+
+  @media (max-width: 576px){
+    .form-header, .form-body{
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    .gender-wrap{
+      flex-direction: column;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="form-shell">
+
+  <div class="form-header">
+    <div class="eyebrow">Workforce Records</div>
+    <h1>Add New Worker</h1>
+    <p>Fill in the details below to register a new employee.</p>
+  </div>
+
+  <div class="form-body">
+    <form method="POST" action="/addworker/">
+
+      <div class="row g-3">
+
+        <div class="col-12">
+          <label class="field-label" for="name"><span class="dot" style="background:var(--clr-indigo)"></span>Full Name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="e.g. Sandeep Yadav" required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="field-label"><span class="dot" style="background:var(--clr-pink)"></span>Gender</label>
+          <div class="gender-wrap">
+            <div class="gender-option">
+              <input type="radio" id="genderMale" name="gender" value="Male" required>
+              <label for="genderMale">🚹 Male</label>
+            </div>
+            <div class="gender-option">
+              <input type="radio" id="genderFemale" name="gender" value="Female">
+              <label for="genderFemale">🚺 Female</label>
+            </div>
+            <div class="gender-option">
+              <input type="radio" id="genderOther" name="gender" value="Other">
+              <label for="genderOther">⚧ Other</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="field-label" for="age"><span class="dot" style="background:var(--clr-amber)"></span>Age</label>
+          <input type="number" class="form-control" id="age" name="age" placeholder="e.g. 41" min="18" max="70" required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="field-label" for="department"><span class="dot" style="background:var(--clr-teal)"></span>Department</label>
+          <select class="form-select" id="department" name="department" required>
+            <option value="" disabled selected>Select department</option>
+            <option value="Administration">Administration</option>
+            <option value="Human Resources">Human Resources</option>
+            <option value="Finance">Finance</option>
+            <option value="Sales">Sales</option>
+            <option value="Marketing">Marketing</option>
+            <option value="IT">IT</option>
+            <option value="Operations">Operations</option>
+            <option value="Customer Support">Customer Support</option>
+            <option value="Logistics">Logistics</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label class="field-label" for="post"><span class="dot" style="background:var(--clr-violet)"></span>Post / Designation</label>
+          <input type="text" class="form-control" id="post" name="post" placeholder="e.g. Office Manager" required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="field-label" for="location"><span class="dot" style="background:var(--clr-indigo)"></span>Location</label>
+          <input type="text" class="form-control" id="location" name="location" placeholder="e.g. Indore" required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="field-label" for="salary"><span class="dot" style="background:var(--clr-pink)"></span>Salary (Monthly)</label>
+          <div class="salary-group">
+            <span class="currency">₹</span>
+            <input type="number" class="form-control" id="salary" name="salary" placeholder="e.g. 70000" min="0" required>
+          </div>
+        </div>
+
+        <div class="col-12 mt-2">
+          <button type="submit" class="submit-btn">Add Worker</button>
+        </div>
+
+        <div class="col-12">
+          <div id="statusMsg" class="status-msg"></div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('workerForm');
+  const statusMsg = document.getElementById('statusMsg');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const genderInput = form.querySelector('input[name="gender"]:checked');
+
+    const payload = {
+      name: document.getElementById('name').value.trim(),
+      gender: genderInput ? genderInput.value : '',
+      age: Number(document.getElementById('age').value),
+      department: document.getElementById('department').value,
+      post: document.getElementById('post').value.trim(),
+      location: document.getElementById('location').value.trim(),
+      salary: Number(document.getElementById('salary').value)
+    };
+
+    const submitBtn = form.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
+
+    try {
+      const response = await fetch('/newworker', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error('Server responded with status ' + response.status);
+      }
+
+      statusMsg.textContent = '✅ Worker added successfully!';
+      statusMsg.className = 'status-msg success';
+      statusMsg.style.display = 'block';
+      form.reset();
+
+    } catch (err) {
+      statusMsg.textContent = '⚠️ Could not add worker. ' + err.message;
+      statusMsg.className = 'status-msg error';
+      statusMsg.style.display = 'block';
+    } finally {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>new student</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body style="margin-top: 30px;">
+    <div class="container">
+        <h1 class="display-5">New Student Registration</h1>
+        <hr>
+        <form method="POST" action="/addstud/">
+            {% csrf_token %}
+            <table class="table">
+                <tr>
+                    <td>Student Name</td>
+                    <td><input type="text" name="snm" autocomplete="off" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>Course</td>
+                    <td>
+                        <select name="cou" class="form-control">
+                            <option value="corejava">Core Java</option>
+                            <option value="corepython">Core Python</option>
+                            <option value="aiagents">AI Agents</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Fees</td>
+                    <td><input type="number" name="fees" autocomplete="off" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+
+    </div>
+    
+</body>
+</html>

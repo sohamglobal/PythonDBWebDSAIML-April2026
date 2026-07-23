@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>doclist</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body style="margin-top: 30px;">
+    <div class="container">
+        <h1 class="display-5">Doctors Report</h1>
+        <hr>
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>Doctor ID</th>
+                <th>Name</th>
+                <th>Specialization</th>
+                <th>Experience</th>
+
+            </tr>
+            {% for doc in docs %}
+
+            <tr>
+               {% for val in doc %}
+                <td>{{val}}</td>
+               {%endfor%}
+            </tr>
+
+
+            {%endfor%}
+
+        </table>
+
+<br><br>
+        <a href="/students/">Home</a>
+    </div>
+    
+</body>
+</html>
