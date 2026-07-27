@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recruiter Dashboard - Job Portal</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+    rel="stylesheet"
+  />
+  
+  <!-- Bootstrap Icons -->
+  <link 
+    rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+  />
+  
+  <!-- Custom Styling -->
+  <style>
+    body {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 50%, #0072ff 100%);
+      background-attachment: fixed;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+    }
+
+    .navbar-custom {
+      background-color: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+    }
+
+    .action-card {
+      border: none;
+      border-radius: 16px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      background: #ffffff;
+    }
+
+    .action-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .icon-badge {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+    }
+
+    /* Icon badge background accents */
+    .badge-post { background-color: rgba(17, 153, 142, 0.15); color: #11998e; }
+    .badge-report { background-color: rgba(0, 114, 255, 0.15); color: #0072ff; }
+    .badge-modify { background-color: rgba(255, 193, 7, 0.15); color: #d39e00; }
+    .badge-delete { background-color: rgba(220, 53, 69, 0.15); color: #dc3545; }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body class="pb-5">
+
+  <!-- Top Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-4 shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">
+        <i class="bi bi-briefcase-fill me-2"></i>Recruiters Admin
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item me-3">
+            <span class="nav-link text-light active"><i class="bi bi-person-circle me-1"></i> TechCorp Inc.</span>
+          </li>
+          <li class="nav-item">
+            <a href="/logout" class="btn btn-outline-light btn-sm rounded-pill px-3">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container">
+    
+    <!-- Header Greeting & Overview -->
+    <div class="text-white mb-4 text-center text-md-start">
+      <h1 class="fw-bold h2 mb-1">Recruiters Home</h1>
+      <p class="text-light opacity-75">Manage your job listings and review incoming application metrics.</p>
+    </div>
+
+    <!-- Quick Overview Stats -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-3">
+        <div class="stat-card p-3 text-white text-center">
+          <div class="fs-4 fw-bold">12</div>
+          <div class="small opacity-75">Active Jobs</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card p-3 text-white text-center">
+          <div class="fs-4 fw-bold">148</div>
+          <div class="small opacity-75">Applications</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card p-3 text-white text-center">
+          <div class="fs-4 fw-bold">5</div>
+          <div class="small opacity-75">Pending Reviews</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card p-3 text-white text-center">
+          <div class="fs-4 fw-bold">3</div>
+          <div class="small opacity-75">Closed Listings</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Cards Grid (Mobile-First 1 Col -> 2 Col on Tablets/Desktops) -->
+    <div class="row g-4">
+
+      <!-- 1. New Job Posting -->
+      <div class="col-12 col-md-6">
+        <div class="card action-card shadow-sm h-100 p-3">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <div class="d-flex align-items-center mb-3">
+              <div class="icon-badge badge-post me-3">
+                <i class="bi bi-plus-square-fill"></i>
+              </div>
+              <div>
+                <h2 class="h5 card-title mb-1 fw-bold text-dark">New Job Posting</h2>
+                <p class="card-text text-muted small mb-0">Create and publish a brand new job opening to attract candidates.</p>
+              </div>
+            </div>
+            <a href="/jobs/new" class="btn btn-outline-success w-100 mt-2 rounded-3 fw-semibold">
+              Post a Job <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Jobs Report -->
+      <div class="col-12 col-md-6">
+        <div class="card action-card shadow-sm h-100 p-3">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <div class="d-flex align-items-center mb-3">
+              <div class="icon-badge badge-report me-3">
+                <i class="bi bi-bar-chart-line-fill"></i>
+              </div>
+              <div>
+                <h2 class="h5 card-title mb-1 fw-bold text-dark">Jobs Report</h2>
+                <p class="card-text text-muted small mb-0">View engagement analytics, candidate responses, and performance stats.</p>
+              </div>
+            </div>
+            <a href="/jobs/reports" class="btn btn-outline-primary w-100 mt-2 rounded-3 fw-semibold">
+              View Analytics <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Modify Job Posting -->
+      <div class="col-12 col-md-6">
+        <div class="card action-card shadow-sm h-100 p-3">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <div class="d-flex align-items-center mb-3">
+              <div class="icon-badge badge-modify me-3">
+                <i class="bi bi-pencil-square"></i>
+              </div>
+              <div>
+                <h2 class="h5 card-title mb-1 fw-bold text-dark">Modify Job Posting</h2>
+                <p class="card-text text-muted small mb-0">Update descriptions, salary ranges, or qualifications for active posts.</p>
+              </div>
+            </div>
+            <a href="/jobs/manage" class="btn btn-outline-warning text-dark w-100 mt-2 rounded-3 fw-semibold">
+              Edit Openings <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Delete a Job Posting -->
+      <div class="col-12 col-md-6">
+        <div class="card action-card shadow-sm h-100 p-3">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <div class="d-flex align-items-center mb-3">
+              <div class="icon-badge badge-delete me-3">
+                <i class="bi bi-trash3-fill"></i>
+              </div>
+              <div>
+                <h2 class="h5 card-title mb-1 fw-bold text-dark">Delete Job Posting</h2>
+                <p class="card-text text-muted small mb-0">Remove or archive expired job requisitions and close applications.</p>
+              </div>
+            </div>
+            <a href="/jobs/delete" class="btn btn-outline-danger w-100 mt-2 rounded-3 fw-semibold">
+              Manage Deletions <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer Note -->
+    <div class="text-center text-white-50 mt-5 small">
+      &copy; Job Portal Admin Panel. All rights reserved.
+    </div>
+
+  </div>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Customer Complaints Lookup</title>
+	<style>
+		body{font-family:Arial,Helvetica,sans-serif;padding:20px}
+		.container{max-width:480px;margin:0 auto}
+		label{display:block;margin-bottom:8px}
+		input[type="text"]{width:100%;padding:8px;margin-bottom:12px;border:1px solid #ccc;border-radius:4px}
+		button{padding:8px 12px;background:#007bff;border:none;color:#fff;border-radius:4px;cursor:pointer}
+		a.home{display:inline-block;margin-left:12px}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Lookup Customer Complaints</h1>
+		<form action="/crm/complaints/" method="get">
+			<label for="account_number">Account Number</label>
+			<input type="text" id="account_number" name="account_number" required placeholder="Enter account number">
+			<div>
+				<button type="submit">Generate Complaint List</button>
+				<a class="home" href="/crm/">Home</a>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
