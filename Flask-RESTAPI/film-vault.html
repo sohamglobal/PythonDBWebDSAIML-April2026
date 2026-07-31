@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reel Vault — Film Catalog</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0a0d14;
+    --bg-deep-2:#0f1420;
+    --bg-card:#151b28;
+    --bg-card-2:#1a2233;
+    --gold:#e3b23c;
+    --gold-dim:#a8842f;
+    --crimson:#b8293a;
+    --crimson-bright:#d63a4c;
+    --cream:#f3eee4;
+    --muted:#8a93a8;
+    --teal:#3e7c82;
+    --line:#242c3d;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(184,41,58,0.18), transparent),
+      radial-gradient(ellipse 60% 40% at 90% 10%, rgba(227,178,60,0.08), transparent),
+      var(--bg-deep);
+    color:var(--cream);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    padding-bottom:80px;
+  }
+
+  /* ---------- Marquee Header ---------- */
+  .marquee{
+    position:relative;
+    padding:64px 24px 48px;
+    text-align:center;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(180deg, rgba(184,41,58,0.10) 0%, transparent 70%);
+  }
+
+  .marquee-lights{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+  .marquee-lights span{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 8px 2px rgba(227,178,60,0.7);
+    animation:blink 1.8s ease-in-out infinite;
+  }
+  .marquee-lights span:nth-child(odd){animation-delay:0.4s;}
+  .marquee-lights span:nth-child(3n){animation-delay:0.9s;}
+  @keyframes blink{
+    0%,100%{opacity:1;}
+    50%{opacity:0.25;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .marquee-lights span{animation:none;}
+  }
+
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    font-size:11px;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+
+  h1.title{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:clamp(48px, 9vw, 96px);
+    letter-spacing:0.04em;
+    line-height:0.95;
+    background:linear-gradient(180deg, var(--cream) 0%, var(--gold) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .subtitle{
+    color:var(--muted);
+    font-size:15px;
+    max-width:520px;
+    margin:16px auto 0;
+    line-height:1.6;
+  }
+
+  .stats-row{
+    display:flex;
+    justify-content:center;
+    gap:32px;
+    margin-top:32px;
+    flex-wrap:wrap;
+  }
+  .stat{
+    font-family:'Space Mono', monospace;
+    text-align:center;
+  }
+  .stat .num{
+    font-size:26px;
+    font-weight:700;
+    color:var(--gold);
+    display:block;
+  }
+  .stat .lbl{
+    font-size:10px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  /* ---------- Controls ---------- */
+  .controls{
+    max-width:1180px;
+    margin:36px auto 0;
+    padding:0 24px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+
+  .search-wrap{
+    position:relative;
+    flex:1 1 280px;
+  }
+  .search-wrap i{
+    position:absolute;
+    left:16px; top:50%;
+    transform:translateY(-50%);
+    color:var(--muted);
+    font-size:14px;
+  }
+  #searchInput{
+    width:100%;
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:12px 16px 12px 40px;
+    color:var(--cream);
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    outline:none;
+    transition:border-color .2s;
+  }
+  #searchInput:focus{border-color:var(--gold-dim);}
+  #searchInput::placeholder{color:var(--muted);}
+
+  .sort-wrap select{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:12px 36px 12px 14px;
+    color:var(--cream);
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    outline:none;
+    cursor:pointer;
+    appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a93a8'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 14px center;
+  }
+
+  .genre-chips{
+    max-width:1180px;
+    margin:16px auto 0;
+    padding:0 24px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .chip{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:7px 14px;
+    border-radius:20px;
+    border:1px solid var(--line);
+    background:var(--bg-card);
+    color:var(--muted);
+    cursor:pointer;
+    transition:all .15s;
+    user-select:none;
+  }
+  .chip:hover{border-color:var(--gold-dim); color:var(--cream);}
+  .chip.active{
+    background:var(--gold);
+    border-color:var(--gold);
+    color:#1a1200;
+    font-weight:700;
+  }
+
+  /* ---------- Grid ---------- */
+  .grid{
+    max-width:1180px;
+    margin:36px auto 0;
+    padding:0 24px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+    gap:22px;
+  }
+
+  /* ---------- Ticket Card ---------- */
+  .card{
+    display:flex;
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    position:relative;
+    opacity:0;
+    transform:translateY(14px);
+    animation:rise .5s ease forwards;
+    transition:border-color .2s, transform .2s;
+  }
+  .card:hover{
+    border-color:var(--gold-dim);
+    transform:translateY(-3px);
+  }
+  @keyframes rise{
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  .card-poster{
+    width:88px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    background:linear-gradient(160deg, var(--genre-color, var(--teal)) 0%, rgba(0,0,0,0.4) 130%);
+  }
+  .card-poster .initial{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:38px;
+    color:rgba(255,255,255,0.85);
+  }
+  .card-poster i.reel{
+    position:absolute;
+    bottom:8px;
+    right:8px;
+    font-size:12px;
+    color:rgba(255,255,255,0.5);
+  }
+
+  .card-body{
+    flex:1;
+    padding:16px 14px;
+    min-width:0;
+  }
+  .card-body h3{
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:16.5px;
+    line-height:1.3;
+    color:var(--cream);
+    margin-bottom:6px;
+  }
+  .meta-line{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:12.5px;
+    color:var(--muted);
+    margin-bottom:4px;
+  }
+  .meta-line i{width:13px; text-align:center; color:var(--gold-dim); font-size:11px;}
+
+  .genre-tag{
+    display:inline-block;
+    margin-top:8px;
+    font-family:'Space Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border-radius:20px;
+    background:rgba(62,124,130,0.18);
+    color:var(--teal);
+    border:1px solid rgba(62,124,130,0.4);
+  }
+
+  /* stub / rating stamp */
+  .card-stub{
+    width:78px;
+    flex-shrink:0;
+    border-left:2px dashed var(--line);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    gap:4px;
+  }
+  .card-stub::before, .card-stub::after{
+    content:'';
+    position:absolute;
+    left:-8px;
+    width:16px; height:16px;
+    border-radius:50%;
+    background:var(--bg-deep);
+    border:1px solid var(--line);
+  }
+  .card-stub::before{top:-8px;}
+  .card-stub::after{bottom:-8px;}
+
+  .stamp{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:17px;
+    color:var(--gold);
+    border:2px solid var(--gold-dim);
+    border-radius:6px;
+    padding:4px 6px;
+    transform:rotate(-8deg);
+    line-height:1;
+  }
+  .stamp-lbl{
+    font-family:'Space Mono', monospace;
+    font-size:8px;
+    letter-spacing:0.1em;
+    color:var(--muted);
+    text-transform:uppercase;
+  }
+
+  /* ---------- States ---------- */
+  .state-box{
+    max-width:520px;
+    margin:80px auto;
+    text-align:center;
+    padding:0 24px;
+  }
+  .state-box i{
+    font-size:36px;
+    color:var(--gold-dim);
+    margin-bottom:18px;
+  }
+  .state-box h2{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:30px;
+    letter-spacing:0.03em;
+    margin-bottom:10px;
+  }
+  .state-box p{
+    color:var(--muted);
+    font-size:13.5px;
+    line-height:1.7;
+    margin-bottom:6px;
+  }
+  .state-box code{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    padding:2px 7px;
+    border-radius:5px;
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    color:var(--gold);
+  }
+  #retryBtn{
+    margin-top:18px;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:13px;
+    background:var(--crimson);
+    color:#fff;
+    border:none;
+    padding:11px 22px;
+    border-radius:7px;
+    cursor:pointer;
+    transition:background .2s;
+  }
+  #retryBtn:hover{background:var(--crimson-bright);}
+
+  .skeleton-grid{
+    max-width:1180px;
+    margin:36px auto 0;
+    padding:0 24px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+    gap:22px;
+  }
+  .skel-card{
+    height:118px;
+    border-radius:10px;
+    background:linear-gradient(100deg, var(--bg-card) 30%, var(--bg-card-2) 50%, var(--bg-card) 70%);
+    background-size:200% 100%;
+    animation:shimmer 1.4s infinite;
+    border:1px solid var(--line);
+  }
+  @keyframes shimmer{
+    0%{background-position:150% 0;}
+    100%{background-position:-50% 0;}
+  }
+
+  .empty-results{
+    text-align:center;
+    color:var(--muted);
+    padding:60px 24px;
+    font-size:14px;
+  }
+
+  footer{
+    text-align:center;
+    margin-top:60px;
+    color:var(--muted);
+    font-size:11.5px;
+    font-family:'Space Mono', monospace;
+    letter-spacing:0.04em;
+  }
+  footer i{color:var(--crimson);}
+
+  @media (max-width:420px){
+    .card{flex-direction:column;}
+    .card-poster{width:100%; height:56px;}
+    .card-stub{
+      width:100%;
+      flex-direction:row;
+      border-left:none;
+      border-top:2px dashed var(--line);
+      padding:10px 0;
+    }
+    .card-stub::before, .card-stub::after{display:none;}
+  }
+</style>
+</head>
+<body>
+
+  <header class="marquee">
+    <div class="marquee-lights">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+    </div>
+    <div class="eyebrow">Now Screening</div>
+    <h1 class="title">REEL VAULT</h1>
+    <p class="subtitle">A living catalog pulled straight from your local projection room — every title, rating and reel, fetched fresh from the API.</p>
+    <div class="stats-row" id="statsRow" style="display:none;">
+      <div class="stat"><span class="num" id="statCount">0</span><span class="lbl">Films</span></div>
+      <div class="stat"><span class="num" id="statGenres">0</span><span class="lbl">Genres</span></div>
+      <div class="stat"><span class="num" id="statAvg">0.0</span><span class="lbl">Avg IMDb</span></div>
+    </div>
+  </header>
+
+  <div class="controls" id="controlsRow" style="display:none;">
+    <div class="search-wrap">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="searchInput" placeholder="Search by title or director…">
+    </div>
+    <div class="sort-wrap">
+      <select id="sortSelect">
+        <option value="rating-desc">Sort: IMDb rating (high–low)</option>
+        <option value="rating-asc">Sort: IMDb rating (low–high)</option>
+        <option value="year-desc">Sort: Release year (new–old)</option>
+        <option value="year-asc">Sort: Release year (old–new)</option>
+        <option value="name-asc">Sort: Title (A–Z)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="genre-chips" id="genreChips"></div>
+
+  <div id="loadingState" class="skeleton-grid">
+    <div class="skel-card"></div><div class="skel-card"></div><div class="skel-card"></div>
+    <div class="skel-card"></div><div class="skel-card"></div><div class="skel-card"></div>
+  </div>
+
+  <div id="errorState" class="state-box" style="display:none;">
+    <i class="fa-solid fa-film"></i>
+    <h2>Reel not found</h2>
+    <p>Couldn't reach the API at <code>http://127.0.0.1:5000/films</code>.</p>
+    <p>Make sure your Flask server is running and this page is opened in a browser that can reach localhost.</p>
+    <button id="retryBtn"><i class="fa-solid fa-rotate-right"></i>&nbsp; Try again</button>
+  </div>
+
+  <div class="grid" id="filmGrid"></div>
+  <div class="empty-results" id="emptyResults" style="display:none;">No films match your search. Try a different title, director, or genre.</div>
+
+  <footer>Reel Vault &middot; built with <i class="fa-solid fa-heart"></i> and <code style="background:none;border:none;color:var(--gold);">fetch()</code></footer>
+
+<script>
+  const API_URL = 'http://127.0.0.1:5000/films';
+
+  const GENRE_COLORS = {
+    'Drama':'#3e7c82', 'Crime':'#b8293a', 'Action':'#c9622a', 'Comedy':'#e3b23c',
+    'Sci-Fi':'#5b6bd6', 'Thriller':'#7a3ea0', 'Romance':'#d64a7a', 'Horror':'#7a1f2b',
+    'Adventure':'#2f9e6e', 'Animation':'#e0a5c9', 'Fantasy':'#8a5bd6', 'Biography':'#4a8fa8',
+    'Mystery':'#4a4a7a', 'War':'#5a5a4a', 'Family':'#5aa8a0', 'Documentary':'#7a8a4a'
+  };
+  const FALLBACK_COLOR = '#3e7c82';
+
+  let allFilms = [];
+  let activeGenre = 'All';
+
+  const grid = document.getElementById('filmGrid');
+  const loadingState = document.getElementById('loadingState');
+  const errorState = document.getElementById('errorState');
+  const statsRow = document.getElementById('statsRow');
+  const controlsRow = document.getElementById('controlsRow');
+  const genreChips = document.getElementById('genreChips');
+  const emptyResults = document.getElementById('emptyResults');
+  const searchInput = document.getElementById('searchInput');
+  const sortSelect = document.getElementById('sortSelect');
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, m => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[m]));
+  }
+
+  function initials(name){
+    if(!name) return '?';
+    const words = name.trim().split(/\s+/);
+    return (words[0][0] + (words[1] ? words[1][0] : '')).toUpperCase();
+  }
+
+  async function loadFilms(){
+    loadingState.style.display = 'grid';
+    errorState.style.display = 'none';
+    grid.style.display = 'none';
+    statsRow.style.display = 'none';
+    controlsRow.style.display = 'none';
+    genreChips.innerHTML = '';
+
+    try{
+      const res = await fetch(API_URL);
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      allFilms = Array.isArray(data) ? data : (data.films || []);
+      if(!allFilms.length){
+        loadingState.style.display = 'none';
+        errorState.style.display = 'block';
+        errorState.querySelector('h2').textContent = 'Empty house tonight';
+        errorState.querySelector('p').textContent = 'The API responded, but no films were returned.';
+        return;
+      }
+      renderStats();
+      renderGenreChips();
+      controlsRow.style.display = 'flex';
+      statsRow.style.display = 'flex';
+      loadingState.style.display = 'none';
+      grid.style.display = 'grid';
+      applyFilters();
+    }catch(err){
+      loadingState.style.display = 'none';
+      errorState.style.display = 'block';
+    }
+  }
+
+  function renderStats(){
+    document.getElementById('statCount').textContent = allFilms.length;
+    const genres = new Set(allFilms.map(f => f.genre).filter(Boolean));
+    document.getElementById('statGenres').textContent = genres.size;
+    const avg = allFilms.reduce((s,f) => s + (Number(f.imdbrating) || 0), 0) / allFilms.length;
+    document.getElementById('statAvg').textContent = avg.toFixed(1);
+  }
+
+  function renderGenreChips(){
+    const genres = ['All', ...new Set(allFilms.map(f => f.genre).filter(Boolean))];
+    genreChips.innerHTML = genres.map(g =>
+      `<button class="chip ${g === activeGenre ? 'active' : ''}" data-genre="${escapeHtml(g)}">${escapeHtml(g)}</button>`
+    ).join('');
+    genreChips.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        activeGenre = chip.dataset.genre;
+        genreChips.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        applyFilters();
+      });
+    });
+  }
+
+  function applyFilters(){
+    const q = searchInput.value.trim().toLowerCase();
+    let films = allFilms.filter(f => {
+      const matchesGenre = activeGenre === 'All' || f.genre === activeGenre;
+      const matchesQuery = !q ||
+        (f.filmname && f.filmname.toLowerCase().includes(q)) ||
+        (f.director && f.director.toLowerCase().includes(q));
+      return matchesGenre && matchesQuery;
+    });
+
+    const sortVal = sortSelect.value;
+    films.sort((a,b) => {
+      switch(sortVal){
+        case 'rating-desc': return (Number(b.imdbrating)||0) - (Number(a.imdbrating)||0);
+        case 'rating-asc': return (Number(a.imdbrating)||0) - (Number(b.imdbrating)||0);
+        case 'year-desc': return (Number(b.releaseyear)||0) - (Number(a.releaseyear)||0);
+        case 'year-asc': return (Number(a.releaseyear)||0) - (Number(b.releaseyear)||0);
+        case 'name-asc': return (a.filmname||'').localeCompare(b.filmname||'');
+        default: return 0;
+      }
+    });
+
+    renderGrid(films);
+  }
+
+  function renderGrid(films){
+    if(!films.length){
+      grid.innerHTML = '';
+      emptyResults.style.display = 'block';
+      return;
+    }
+    emptyResults.style.display = 'none';
+    grid.innerHTML = films.map((f, i) => {
+      const color = GENRE_COLORS[f.genre] || FALLBACK_COLOR;
+      const rating = Number(f.imdbrating);
+      return `
+        <article class="card" style="animation-delay:${Math.min(i*40,400)}ms;">
+          <div class="card-poster" style="--genre-color:${color};">
+            <span class="initial">${escapeHtml(initials(f.filmname))}</span>
+            <i class="fa-solid fa-compact-disc reel"></i>
+          </div>
+          <div class="card-body">
+            <h3>${escapeHtml(f.filmname || 'Untitled')}</h3>
+            <div class="meta-line"><i class="fa-solid fa-clapperboard"></i>${escapeHtml(f.director || 'Unknown director')}</div>
+            <div class="meta-line"><i class="fa-solid fa-calendar"></i>${escapeHtml(f.releaseyear || '—')}</div>
+            <div class="meta-line"><i class="fa-solid fa-globe"></i>${escapeHtml(f.language || '—')}</div>
+            <span class="genre-tag" style="color:${color};border-color:${color}66;background:${color}22;">${escapeHtml(f.genre || 'N/A')}</span>
+          </div>
+          <div class="card-stub">
+            <div class="stamp">${isNaN(rating) ? '—' : rating.toFixed(1)}</div>
+            <div class="stamp-lbl">IMDb</div>
+          </div>
+        </article>
+      `;
+    }).join('');
+  }
+
+  searchInput.addEventListener('input', applyFilters);
+  sortSelect.addEventListener('change', applyFilters);
+  document.getElementById('retryBtn').addEventListener('click', loadFilms);
+
+  loadFilms();
+</script>
+</body>
+</html>
