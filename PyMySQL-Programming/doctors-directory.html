@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian Clinic — Specialist Directory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #16323F;
+    --navy-2: #1E4553;
+    --paper: #F6F7F5;
+    --panel: #FFFFFF;
+    --ink: #142A31;
+    --ink-soft: #5B6E74;
+    --coral: #E4602F;
+    --coral-soft: #FBE3D7;
+    --mint: #DCEEE6;
+    --gold: #B8862E;
+    --line: #DDE3E1;
+    --radius: 14px;
+    --shadow: 0 10px 30px -14px rgba(20,42,49,0.25);
+  }
+
+  * { box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .mono{ font-family:'IBM Plex Mono', monospace; letter-spacing:0.02em; }
+
+  /* ---------- HEADER ---------- */
+  header.site{
+    background: var(--navy);
+    color: #EAF1F0;
+    padding: 22px clamp(20px,5vw,64px);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom: 3px solid var(--coral);
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .brand-mark{
+    width:38px; height:38px;
+    border-radius:10px;
+    background: var(--coral);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .brand-mark svg{ width:20px; height:20px; }
+  .brand-text .name{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.25rem;
+    line-height:1;
+  }
+  .brand-text .tag{
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:#9FC0BC;
+    margin-top:4px;
+  }
+  header.site nav{
+    font-size:0.85rem;
+    color:#BFD6D2;
+    letter-spacing:0.03em;
+  }
+  header.site nav span{ opacity:0.55; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background: var(--navy);
+    color:#fff;
+    padding: 10px clamp(20px,5vw,64px) 46px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-inner{ max-width: 1180px; margin:0 auto; position:relative; z-index:2; }
+  .hero h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: clamp(2rem, 4.2vw, 3.2rem);
+    line-height:1.08;
+    margin: 18px 0 10px;
+    max-width: 14ch;
+  }
+  .hero h1 em{ font-style:italic; color:#F2A583; }
+  .hero p.lede{
+    color:#B9D0CC;
+    max-width: 46ch;
+    font-size: 1.02rem;
+    line-height:1.55;
+    margin: 0 0 28px;
+  }
+
+  /* ECG signature line */
+  .ecg-wrap{
+    width:100%;
+    max-width: 640px;
+    height: 46px;
+    margin-bottom: 8px;
+  }
+  .ecg-wrap svg{ width:100%; height:100%; display:block; }
+  .ecg-path{
+    fill:none;
+    stroke: var(--coral);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 900;
+    stroke-dashoffset: 900;
+    animation: draw 2.6s ease-out forwards infinite;
+  }
+  @keyframes draw{
+    0%{ stroke-dashoffset: 900; opacity:0.4;}
+    60%{ stroke-dashoffset: 0; opacity:1;}
+    100%{ stroke-dashoffset: -900; opacity:0.4;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ecg-path{ animation:none; stroke-dashoffset:0; }
+  }
+
+  /* ---------- CONTROLS ---------- */
+  .controls{
+    max-width: 1180px;
+    margin: -30px auto 0;
+    padding: 0 clamp(20px,5vw,64px);
+    position:relative;
+    z-index:3;
+  }
+  .controls-panel{
+    background: var(--panel);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px 22px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+    align-items:center;
+    border: 1px solid var(--line);
+  }
+  .search-box{
+    flex: 1 1 240px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    padding: 10px 16px;
+    background: var(--paper);
+  }
+  .search-box svg{ flex-shrink:0; opacity:0.55; }
+  .search-box input{
+    border:none; outline:none; background:transparent;
+    font-family:'Inter', sans-serif;
+    font-size: 0.95rem;
+    width:100%;
+    color: var(--ink);
+  }
+  .search-box input::placeholder{ color:#9AA9A6; }
+
+  .chip-row{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .chip{
+    border: 1.5px solid var(--line);
+    background: #fff;
+    color: var(--ink-soft);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor:pointer;
+    transition: all 0.15s ease;
+    white-space:nowrap;
+  }
+  .chip:hover{ border-color: var(--coral); color: var(--coral); }
+  .chip.active{
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+  }
+
+  .sort-btn{
+    margin-left:auto;
+    display:flex; align-items:center; gap:8px;
+    border: 1.5px solid var(--line);
+    background:#fff;
+    padding: 9px 14px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight:600;
+    color: var(--ink-soft);
+    cursor:pointer;
+  }
+  .sort-btn:hover{ border-color: var(--gold); color: var(--gold); }
+  .sort-btn svg{ transition: transform 0.2s ease; }
+  .sort-btn.desc svg{ transform: rotate(180deg); }
+
+  /* ---------- STATUS BAR ---------- */
+  .status-line{
+    max-width: 1180px;
+    margin: 18px auto 0;
+    padding: 0 clamp(20px,5vw,64px);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .dot{
+    width:8px; height:8px; border-radius:50%;
+    background: #9AA9A6;
+  }
+  .dot.live{ background:#3C9D6F; box-shadow:0 0 0 4px rgba(60,157,111,0.15); }
+  .dot.err{ background: var(--coral); box-shadow:0 0 0 4px rgba(228,96,47,0.15); }
+
+  /* ---------- MAIN / DIRECTORY BOARD ---------- */
+  main{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 24px clamp(20px,5vw,64px) 80px;
+  }
+
+  .board{
+    display:grid;
+    gap:14px;
+  }
+
+  .doctor-card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    display:grid;
+    grid-template-columns: 56px 1fr auto auto;
+    align-items:center;
+    gap:18px;
+    cursor:pointer;
+    transition: box-shadow 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+  }
+  .doctor-card:hover{
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+    border-color: #CBD8D5;
+  }
+  .doctor-card:focus-visible{
+    outline: 3px solid var(--coral);
+    outline-offset: 2px;
+  }
+
+  .avatar-badge{
+    width:56px; height:56px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.15rem;
+    color: var(--navy);
+    flex-shrink:0;
+  }
+
+  .doc-main .name{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.15rem;
+    margin:0 0 4px;
+    color: var(--ink);
+  }
+  .doc-main .spec-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  .exp-block{
+    text-align:right;
+    min-width:110px;
+  }
+  .exp-block .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1.5rem;
+    font-weight:500;
+    color: var(--navy);
+    line-height:1;
+  }
+  .exp-block .lbl{
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color: var(--ink-soft);
+    margin-top:3px;
+  }
+  .exp-bar-track{
+    width:100px; height:4px; border-radius:2px;
+    background: var(--line);
+    margin-top:8px;
+    overflow:hidden;
+  }
+  .exp-bar-fill{
+    height:100%;
+    background: var(--coral);
+    border-radius:2px;
+    width:0%;
+    transition: width 0.8s cubic-bezier(.2,.8,.2,1);
+  }
+
+  .expand-icon{
+    width:32px; height:32px;
+    border-radius:50%;
+    border: 1.5px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    color: var(--ink-soft);
+    transition: transform 0.25s ease, background 0.2s ease, color 0.2s ease;
+    flex-shrink:0;
+  }
+  .doctor-card.open .expand-icon{
+    transform: rotate(135deg);
+    background: var(--coral);
+    color:#fff;
+    border-color: var(--coral);
+  }
+
+  .detail-panel{
+    grid-column: 1 / -1;
+    max-height:0;
+    overflow:hidden;
+    transition: max-height 0.32s ease, opacity 0.25s ease, margin-top 0.25s ease;
+    opacity:0;
+    margin-top:0;
+  }
+  .doctor-card.open .detail-panel{
+    max-height: 220px;
+    opacity:1;
+    margin-top: 4px;
+  }
+  .detail-inner{
+    border-top: 1px dashed var(--line);
+    padding-top: 14px;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .detail-item .k{
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color: var(--ink-soft);
+    margin-bottom:4px;
+  }
+  .detail-item .v{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.95rem;
+    color: var(--ink);
+  }
+
+  /* ---------- EMPTY / LOADING / ERROR ---------- */
+  .state-panel{
+    background: var(--panel);
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+    padding: 48px 24px;
+    text-align:center;
+    color: var(--ink-soft);
+  }
+  .state-panel h3{
+    font-family:'Fraunces', serif;
+    color: var(--ink);
+    margin: 12px 0 6px;
+    font-weight:600;
+  }
+  .state-panel p{ margin:0 0 18px; font-size:0.9rem; max-width:44ch; margin-left:auto; margin-right:auto; }
+  .retry-btn{
+    background: var(--navy);
+    color:#fff;
+    border:none;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-weight:600;
+    font-size:0.85rem;
+    cursor:pointer;
+  }
+  .retry-btn:hover{ background: var(--navy-2); }
+
+  .skel{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    display:grid;
+    grid-template-columns: 56px 1fr auto;
+    gap:18px;
+    align-items:center;
+  }
+  .skel-block{
+    background: linear-gradient(90deg, #ECEFED 25%, #F5F6F5 37%, #ECEFED 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.4s ease infinite;
+    border-radius: 8px;
+  }
+  @keyframes shimmer{ 0%{background-position: 100% 50%;} 100%{background-position: 0 50%;} }
+
+  /* ---------- FOOTER ---------- */
+  footer.site{
+    background: var(--navy);
+    color:#9FC0BC;
+    padding: 32px clamp(20px,5vw,64px);
+    font-size: 0.82rem;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    align-items:center;
+    justify-content:space-between;
+    border-top: 3px solid var(--coral);
+  }
+  footer.site .foot-left{ display:flex; align-items:center; gap:10px; }
+  footer.site strong{ color:#EAF1F0; font-family:'Fraunces', serif; font-weight:600; }
+
+  @media (max-width: 640px){
+    .doctor-card{ grid-template-columns: 44px 1fr; }
+    .exp-block{ grid-column: 1/-1; text-align:left; display:flex; align-items:center; gap:12px; }
+    .exp-bar-track{ margin-top:0; }
+    .expand-icon{ position:absolute; }
+    .detail-inner{ grid-template-columns: 1fr; }
+    .sort-btn{ margin-left:0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="brand">
+    <div class="brand-mark">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 3v6a4 4 0 0 0 8 0V3" stroke="white" stroke-width="1.8" stroke-linecap="round"/><circle cx="18" cy="15" r="3" stroke="white" stroke-width="1.8"/><path d="M10 9v3a5 5 0 0 0 5 5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </div>
+    <div class="brand-text">
+      <div class="name">Meridian Clinic</div>
+      <div class="tag">Specialist Directory</div>
+    </div>
+  </div>
+  <nav><span class="mono" id="clock"></span></nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="ecg-wrap">
+      <svg viewBox="0 0 640 46" preserveAspectRatio="none">
+        <path class="ecg-path" d="M0,23 L120,23 L140,23 L152,6 L164,40 L176,14 L188,23 L210,23 L640,23"/>
+      </svg>
+    </div>
+    <h1>Find the right <em>specialist</em>,<br>the moment you need one.</h1>
+    <p class="lede">Live from our records system — search, filter, and sort every doctor currently practicing at Meridian Clinic.</p>
+  </div>
+</section>
+
+<div class="controls">
+  <div class="controls-panel">
+    <div class="search-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="searchInput" placeholder="Search by name or specialization…">
+    </div>
+    <div class="chip-row" id="chipRow">
+      <button class="chip active" data-spec="all">All specialists</button>
+    </div>
+    <button class="sort-btn" id="sortBtn">
+      <span id="sortLabel">Most experienced</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 4v16M12 20l-5-5M12 20l5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="status-line">
+  <span class="dot" id="statusDot"></span>
+  <span id="statusText">Connecting to http://127.0.0.1:5000/doctors …</span>
+</div>
+
+<main>
+  <div class="board" id="board">
+    <div class="skel"><div class="skel-block" style="width:56px;height:56px;border-radius:50%;"></div><div class="skel-block" style="height:16px;width:60%;"></div><div class="skel-block" style="height:24px;width:70px;"></div></div>
+    <div class="skel"><div class="skel-block" style="width:56px;height:56px;border-radius:50%;"></div><div class="skel-block" style="height:16px;width:45%;"></div><div class="skel-block" style="height:24px;width:70px;"></div></div>
+    <div class="skel"><div class="skel-block" style="width:56px;height:56px;border-radius:50%;"></div><div class="skel-block" style="height:16px;width:55%;"></div><div class="skel-block" style="height:24px;width:70px;"></div></div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="foot-left">
+    <span><strong>Meridian Clinic</strong> — Specialist Directory</span>
+  </div>
+  <span>Data source: <span class="mono">GET /doctors</span> · Records refresh live from the clinic API</span>
+</footer>
+
+<script>
+  // ---------- Clock ----------
+  function tickClock(){
+    const el = document.getElementById('clock');
+    const now = new Date();
+    el.textContent = now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+  }
+  tickClock();
+  setInterval(tickClock, 1000);
+
+  // ---------- Config ----------
+  const API_URL = 'http://127.0.0.1:5000/doctors';
+
+  const SPEC_STYLES = {
+    'Cardiologist':   { bg:'#FBE3D7', fg:'#B8451E', chipFg:'#E4602F' },
+    'Neurologist':    { bg:'#E3E1F7', fg:'#4B3FA8', chipFg:'#4B3FA8' },
+    'Orthopedic':     { bg:'#DCEEE6', fg:'#1F6E4C', chipFg:'#1F6E4C' },
+    'Dermatologist':  { bg:'#FCEBD4', fg:'#B8862E', chipFg:'#B8862E' },
+    'Pediatrician':   { bg:'#D9EAF5', fg:'#1F6C93', chipFg:'#1F6C93' },
+    'default':        { bg:'#E7ECEA', fg:'#3A5158', chipFg:'#3A5158' }
+  };
+  function styleFor(spec){ return SPEC_STYLES[spec] || SPEC_STYLES.default; }
+  function initials(name){
+    return name.replace(/^Dr\.?\s*/i,'').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  }
+
+  // ---------- State ----------
+  let allDoctors = [];
+  let activeSpec = 'all';
+  let searchTerm = '';
+  let sortDesc = true;
+  let openCardId = null;
+
+  const boardEl = document.getElementById('board');
+  const statusDot = document.getElementById('statusDot');
+  const statusText = document.getElementById('statusText');
+  const chipRow = document.getElementById('chipRow');
+  const searchInput = document.getElementById('searchInput');
+  const sortBtn = document.getElementById('sortBtn');
+  const sortLabel = document.getElementById('sortLabel');
+
+  // ---------- Fetch ----------
+  async function loadDoctors(){
+    statusDot.className = 'dot';
+    statusText.textContent = 'Connecting to ' + API_URL + ' …';
+    try{
+      const res = await fetch(API_URL);
+      if(!res.ok) throw new Error('Server responded with status ' + res.status);
+      const data = await res.json();
+      allDoctors = Array.isArray(data) ? data : [];
+      statusDot.className = 'dot live';
+      statusText.textContent = allDoctors.length + ' specialist' + (allDoctors.length===1?'':'s') + ' loaded from live records.';
+      buildChips();
+      render();
+    }catch(err){
+      statusDot.className = 'dot err';
+      statusText.textContent = 'Could not reach the API.';
+      renderError(err);
+    }
+  }
+
+  function buildChips(){
+    const specs = Array.from(new Set(allDoctors.map(d=>d.specialization))).sort();
+    chipRow.innerHTML = '';
+    const allChip = document.createElement('button');
+    allChip.className = 'chip' + (activeSpec==='all' ? ' active' : '');
+    allChip.textContent = 'All specialists';
+    allChip.dataset.spec = 'all';
+    allChip.addEventListener('click', ()=>{ activeSpec='all'; refreshChipStates(); render(); });
+    chipRow.appendChild(allChip);
+
+    specs.forEach(spec=>{
+      const chip = document.createElement('button');
+      chip.className = 'chip' + (activeSpec===spec ? ' active' : '');
+      chip.textContent = spec;
+      chip.dataset.spec = spec;
+      chip.addEventListener('click', ()=>{ activeSpec=spec; refreshChipStates(); render(); });
+      chipRow.appendChild(chip);
+    });
+  }
+  function refreshChipStates(){
+    Array.from(chipRow.children).forEach(c=>{
+      c.classList.toggle('active', c.dataset.spec === activeSpec);
+    });
+  }
+
+  searchInput.addEventListener('input', (e)=>{
+    searchTerm = e.target.value.trim().toLowerCase();
+    render();
+  });
+
+  sortBtn.addEventListener('click', ()=>{
+    sortDesc = !sortDesc;
+    sortBtn.classList.toggle('desc', !sortDesc);
+    sortLabel.textContent = sortDesc ? 'Most experienced' : 'Least experienced';
+    render();
+  });
+
+  function getFiltered(){
+    let list = allDoctors.filter(d=>{
+      const matchesSpec = activeSpec==='all' || d.specialization === activeSpec;
+      const matchesSearch = !searchTerm ||
+        d.doctor_name.toLowerCase().includes(searchTerm) ||
+        d.specialization.toLowerCase().includes(searchTerm);
+      return matchesSpec && matchesSearch;
+    });
+    list.sort((a,b)=> sortDesc ? b.experience_years - a.experience_years : a.experience_years - b.experience_years);
+    return list;
+  }
+
+  function render(){
+    const list = getFiltered();
+    const maxExp = Math.max(...allDoctors.map(d=>d.experience_years), 1);
+
+    if(list.length === 0){
+      boardEl.innerHTML = `
+        <div class="state-panel">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#9AA9A6" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="#9AA9A6" stroke-width="2" stroke-linecap="round"/></svg>
+          <h3>No specialists match</h3>
+          <p>Try a different name, specialization, or clear your filters.</p>
+        </div>`;
+      return;
+    }
+
+    boardEl.innerHTML = list.map(d=>{
+      const st = styleFor(d.specialization);
+      const pct = Math.round((d.experience_years / maxExp) * 100);
+      const isOpen = openCardId === d.doctor_id;
+      return `
+      <div class="doctor-card ${isOpen ? 'open':''}" data-id="${d.doctor_id}" tabindex="0" role="button" aria-expanded="${isOpen}">
+        <div class="avatar-badge" style="background:${st.bg};color:${st.fg};">${initials(d.doctor_name)}</div>
+        <div class="doc-main">
+          <p class="name">${escapeHtml(d.doctor_name)}</p>
+          <span class="spec-tag" style="background:${st.bg};color:${st.chipFg};">${escapeHtml(d.specialization)}</span>
+        </div>
+        <div class="exp-block">
+          <div class="num">${d.experience_years}<span style="font-size:0.9rem;"> yrs</span></div>
+          <div class="lbl">Experience</div>
+          <div class="exp-bar-track"><div class="exp-bar-fill" style="width:${pct}%;background:${st.fg};"></div></div>
+        </div>
+        <div class="expand-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="detail-panel">
+          <div class="detail-inner">
+            <div class="detail-item"><div class="k">Doctor ID</div><div class="v">#${String(d.doctor_id).padStart(4,'0')}</div></div>
+            <div class="detail-item"><div class="k">Full title</div><div class="v">${escapeHtml(d.doctor_name)}</div></div>
+            <div class="detail-item"><div class="k">Years in practice</div><div class="v">${d.experience_years} years</div></div>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+
+    // animate bars in on next frame
+    requestAnimationFrame(()=>{
+      document.querySelectorAll('.exp-bar-fill').forEach(el=>{
+        const w = el.style.width; el.style.width = '0%';
+        requestAnimationFrame(()=>{ el.style.width = w; });
+      });
+    });
+
+    document.querySelectorAll('.doctor-card').forEach(card=>{
+      const toggle = ()=>{
+        const id = Number(card.dataset.id);
+        openCardId = openCardId === id ? null : id;
+        render();
+      };
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); }
+      });
+    });
+  }
+
+  function renderError(err){
+    boardEl.innerHTML = `
+      <div class="state-panel">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" style="margin:auto;"><circle cx="12" cy="12" r="9" stroke="#E4602F" stroke-width="2"/><path d="M12 8v5" stroke="#E4602F" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16" r="1" fill="#E4602F"/></svg>
+        <h3>Can't reach the directory</h3>
+        <p>The page tried to call <span class="mono">${API_URL}</span> and didn't get a response. Make sure the Flask API is running and that CORS is enabled for this page's origin, then try again.</p>
+        <button class="retry-btn" id="retryBtn">Retry connection</button>
+      </div>`;
+    document.getElementById('retryBtn').addEventListener('click', loadDoctors);
+  }
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  loadDoctors();
+</script>
+
+</body>
+</html>
